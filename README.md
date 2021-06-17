@@ -5,7 +5,6 @@
 ![Release](https://img.shields.io/github/v/release/cucinaretro/site)
 ![GatsbyJS](https://img.shields.io/github/package-json/dependency-version/cucinaretro/site/gatsby)
 ![React](https://img.shields.io/github/package-json/dependency-version/cucinaretro/site/react)
-![Build and Deploy](https://github.com/cucinaretro/site/workflows/Build%20and%20Deploy/badge.svg)
 
 This project contains the main [website](https://cucinaretro.com/) of Cucina Retrò.
 
