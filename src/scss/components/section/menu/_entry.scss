@@ -1,0 +1,20 @@
+@import "../../../variables";
+
+.menu-entry {
+  .icon-cucinaretro-vegetarian {
+    color: $green;
+  }
+  .title {
+    color: $grey-darker;
+    margin-bottom: $size-7;
+    .icon {
+      font-size: $size-4;
+    }
+  }
+  .description {
+    font-size: $size-7 * 1.05;
+  }
+  .price-notes {
+    font-style: oblique;
+  }
+}

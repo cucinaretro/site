@@ -1,0 +1,23 @@
+@import "@pittica/scss-functions";
+
+@import url("https://fonts.googleapis.com/css?family=Arbutus+Slab&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700,700i&display=swap");
+
+@include font(cucinaretro);
+@include icon-family(cucinaretro);
+
+@include icon(cucinaretro, down, "\2b9f");
+@include icon(cucinaretro, left, "\2b9c");
+@include icon(cucinaretro, up, "\2b9d");
+@include icon(cucinaretro, right, "\2b9e");
+@include icon(cucinaretro, email, "\1f4e7");
+@include icon(cucinaretro, phone, "\1f57e");
+@include icon(cucinaretro, instagram, "\e906");
+@include icon(cucinaretro, facebook, "\e907");
+@include icon(cucinaretro, signal, "\1f4e1");
+@include icon(cucinaretro, images, "\e909");
+@include icon(cucinaretro, download, "\e90a");
+@include icon(cucinaretro, shop, "\1f3ec");
+@include icon(cucinaretro, location-pin, "\1f4cd");
+@include icon(cucinaretro, whatsapp, "\e90d");
+@include icon(cucinaretro, vegetarian, "\e900");

@@ -1,0 +1,19 @@
+@import "../../variables";
+
+.page-content {
+  margin-bottom: $size-2;
+  .container {
+    margin-bottom: $size-2;
+  }
+  .title {
+    line-height: $size-1;
+  }
+  .subtitle {
+    line-height: $size-2;
+  }
+  .text {
+    p {
+      line-height: $size-3;
+    }
+  }
+}

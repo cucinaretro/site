@@ -1,0 +1,16 @@
+@import "@pittica/scss-functions";
+@import "../../variables";
+
+@import "~bulma/sass/utilities/mixins";
+
+.navbar-item {
+  text-transform: uppercase;
+  font-family: $family-secondary;
+  letter-spacing: 0.1rem;
+  font-size: $size-6 + $size-7;
+  text-align: right;
+  @include transition();
+  @include until($desktop) {
+    color: $primary;
+  }
+}

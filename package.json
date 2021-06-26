@@ -1,0 +1,67 @@
+{
+  "name": "site",
+  "private": true,
+  "description": "cucinaretro.it website.",
+  "version": "1.0.0",
+  "author": "Lucio Benini <info@pittica.com>",
+  "bugs": {
+    "url": "https://github.com/cucinaretro/site/issues"
+  },
+  "dependencies": {
+    "@mdx-js/mdx": "^1.6.22",
+    "@mdx-js/react": "^1.6.22",
+    "@pittica/gatsby-plugin-seo": "^2.1.4",
+    "@pittica/gatsby-plugin-utils": "^1.0.1",
+    "@pittica/scss-functions": "^1.1.1",
+    "classnames": "^2.3.1",
+    "gatsby": "^3.8.0",
+    "gatsby-plugin-gdpr-cookies": "^2.0.6",
+    "gatsby-plugin-htaccess": "^1.4.0",
+    "gatsby-plugin-image": "^1.8.0",
+    "gatsby-plugin-manifest": "^3.8.0",
+    "gatsby-plugin-mdx": "^2.8.0",
+    "gatsby-plugin-netlify": "^3.8.0",
+    "gatsby-plugin-offline": "^4.8.0",
+    "gatsby-plugin-preconnect": "^1.2.0",
+    "gatsby-plugin-react-helmet": "^4.8.0",
+    "gatsby-plugin-sass": "^4.8.0",
+    "gatsby-plugin-sharp": "^3.8.0",
+    "gatsby-plugin-sitemap": "^4.4.0",
+    "gatsby-source-filesystem": "^3.8.0",
+    "gatsby-source-graphcms": "^2.5.2",
+    "gatsby-transformer-sharp": "^3.8.0",
+    "ink": "^3.0.8",
+    "prismjs": "^1.23.0",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-helmet": "^6.1.0",
+    "validator": "^13.6.0"
+  },
+  "devDependencies": {
+    "bulma": "^0.9.3",
+    "gatsby-cli": "^3.8.0",
+    "node-sass": "^5.0.0",
+    "prettier": "^2.3.2"
+  },
+  "homepage": "https://cucinaretro.it",
+  "keywords": [
+    "gatsby",
+    "cucinaretro",
+    "website"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cucinaretro/site.git"
+  },
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
+    "start": "npm run develop",
+    "serve": "gatsby serve",
+    "clean": "rm -rf .cache",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+  }
+}
