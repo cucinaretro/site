@@ -6,6 +6,11 @@
 @include font(cucinaretro);
 @include icon-family(cucinaretro);
 
+@include icon(cucinaretro, ornament-title, "\e900");
+@include icon(cucinaretro, devider-secondary, "\e901");
+@include icon(cucinaretro, devider-primary, "\e902");
+@include icon(cucinaretro, whatsapp, "\e90d");
+@include icon(cucinaretro, vegetarian, "\e904");
 @include icon(cucinaretro, down, "\2b9f");
 @include icon(cucinaretro, left, "\2b9c");
 @include icon(cucinaretro, up, "\2b9d");
@@ -19,5 +24,3 @@
 @include icon(cucinaretro, download, "\e90a");
 @include icon(cucinaretro, shop, "\1f3ec");
 @include icon(cucinaretro, location-pin, "\1f4cd");
-@include icon(cucinaretro, whatsapp, "\e90d");
-@include icon(cucinaretro, vegetarian, "\e900");

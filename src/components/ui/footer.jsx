@@ -1,15 +1,19 @@
-import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
-import classnames from 'classnames';
-import { SocialFollow } from '@pittica/gatsby-plugin-seo';
+import React from "react"
+import { useStaticQuery, graphql } from "gatsby"
+import classnames from "classnames"
+import { SocialFollow } from "@pittica/gatsby-plugin-seo"
 
-import logo from '../../images/footer/logo.svg';
-import top from '../../images/footer/top.svg';
+import logo from "../../images/footer/logo.svg"
+import top from "../../images/footer/top.svg"
 
-import '../../scss/components/ui/_footer.scss';
+import "../../scss/components/ui/_footer.scss"
 
 export default function Footer() {
-  const { site: { siteMetadata: { organization } } } = useStaticQuery(
+  const {
+    site: {
+      siteMetadata: { organization },
+    },
+  } = useStaticQuery(
     graphql`
       query {
         site {
@@ -31,7 +35,7 @@ export default function Footer() {
         }
       }
     `
-  );
+  )
 
   return (
     <div className="footer-container">
@@ -41,27 +45,34 @@ export default function Footer() {
       <footer className="footer">
         <div className="container">
           <div className="columns">
-            <div className={classnames('column', 'is-two-quarters')}>
+            <div className={classnames("column", "is-two-quarters")}>
               <img src={logo} alt="Cucina Retrò" width="307" height="159" />
             </div>
             <div
-              className={classnames('column', 'is-one-quarter', 'company')}
+              className={classnames("column", "is-one-quarter", "company")}
               itemScope=""
               itemType="https://schema.org/Organization"
             >
               <h3 itemProp="name">{organization.company}</h3>
               <div>
-                <address itemProp="address" itemScope="" itemType="https://schema.org/PostalAddress">
+                <address
+                  itemProp="address"
+                  itemScope=""
+                  itemType="https://schema.org/PostalAddress"
+                >
                   <span itemProp="streetAddress">{organization.address}</span>
                   <br />
-                  <span itemProp="postalCode">{organization.zipCode}</span>{' '}
-                  <span itemProp="addressLocality">{organization.city}</span> (<span itemProp="addressRegion">{organization.province}</span>)<br />
+                  <span itemProp="postalCode">{organization.zipCode}</span>{" "}
+                  <span itemProp="addressLocality">{organization.city}</span> (
+                  <span itemProp="addressRegion">{organization.province}</span>)
+                  <br />
                   <span itemProp="addressCountry">{organization.country}</span>
                 </address>
               </div>
               {organization.taxId && (
                 <div>
-                  Codice Fiscale <span itemProp="taxID">{organization.taxId}</span>
+                  Codice Fiscale{" "}
+                  <span itemProp="taxID">{organization.taxId}</span>
                 </div>
               )}
               {organization.vatId && (
@@ -81,14 +92,16 @@ export default function Footer() {
               )}
               {organization.email && (
                 <div>
-                  E-Mail{' '}
+                  E-Mail{" "}
                   <span itemProp="email">
-                    <a href={`mailto:${organization.email}`}>{organization.email}</a>
+                    <a href={`mailto:${organization.email}`}>
+                      {organization.email}
+                    </a>
                   </span>
                 </div>
               )}
             </div>
-            <SocialFollow className={classnames('column', 'one-quarter')} />
+            <SocialFollow className={classnames("column", "one-quarter")} />
           </div>
           <div>
             &copy; {new Date().getFullYear()}, {organization.company}
@@ -96,5 +109,5 @@ export default function Footer() {
         </div>
       </footer>
     </div>
-  );
+  )
 }

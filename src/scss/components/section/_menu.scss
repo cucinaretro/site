@@ -1,21 +1,22 @@
 @import "@pittica/scss-functions";
 
-@import "../variables";
+@import "../../variables";
 
 .food-menu {
   h1 {
+    cursor: default;
     &.title {
       text-align: center;
       margin: ($size-1 * 2) 5%;
       &:before,
       &:after {
         display: block;
-        content: " ";
+        content: "\e900";
+        font-family: cucinaretro;
+        font-size: $size-1 * 3;
+        color: $primary-invert;
         position: absolute;
-        background: url("../../images/menu/ornament-title.svg");
         background-size: cover;
-        width: $size-1 * 3;
-        height: $size-1 * 3;
         z-index: -1;
       }
       &:before {
@@ -31,7 +32,7 @@
   .section {
     h2 {
       &.title {
-        background: url("../../images/menu/ornament-section.svg") no-repeat left center;
+        background: url("../../../images/menu/subtitle/primary.svg") no-repeat left center;
         text-transform: uppercase;
         letter-spacing: $size-6 / 2;
         margin-bottom: $size-2;
@@ -44,20 +45,21 @@
     }
     &:after {
       display: block;
-      content: " ";
+      font-family: cucinaretro;
+      content: "\e901";
+      font-size: $size-1 * 4;
+      text-align: center;
       width: 100%;
-      background: url("../../images/menu/divider.svg") no-repeat center center;
-      height: $size-1;
-      margin-top: $size-1 * 2;
+      color: $primary;
     }
     &:nth-child(even) {
       h2 {
         &.title {
-          background-image: url("../../images/menu/ornament-section-alternate.svg");
+          background-image: url("../../../images/menu/subtitle/secondary.svg");
         }
       }
       &:after {
-        background-image: url("../../images/menu/divider-alternate.svg");
+        content: "\e902";
       }
     }
   }

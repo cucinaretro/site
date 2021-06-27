@@ -1,11 +1,17 @@
-import React from 'react';
-import { Seo } from '@pittica/gatsby-plugin-seo';
+import React from "react"
+import { Seo } from "@pittica/gatsby-plugin-seo"
 
-import Navbar from '../nav/navbar';
-import Footer from '../ui/footer';
-import Main from '../ui/main';
+import Navbar from "../nav/navbar"
+import Footer from "../ui/footer"
+import Main from "../ui/main"
 
-export default function Layout({ children, location, title, description, locale }) {
+export default function Layout({
+  children,
+  location,
+  title,
+  description,
+  locale,
+}) {
   return (
     <div>
       <Seo title={title} description={description} path={location.pathname} />
@@ -13,5 +19,5 @@ export default function Layout({ children, location, title, description, locale 
       <Main>{children}</Main>
       <Footer />
     </div>
-  );
+  )
 }
