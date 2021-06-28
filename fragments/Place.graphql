@@ -41,7 +41,7 @@ fragment Place on Place {
       text
     }
   }
-  pageSections {
+  pages {
     ... on Page {
       remoteTypeName: __typename
       remoteId: id

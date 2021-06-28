@@ -3,15 +3,6 @@
 @import "~bulma/sass/utilities/mixins";
 
 .navbar {
-  &:after {
-    display: block;
-    content: " ";
-    width: 100%;
-    height: 17px;
-    background: url("../../../images/nav/bottom.svg") repeat-x center top;
-    position: fixed;
-    top: $navbar-height;
-  }
   .navbar-logo {
     height: $navbar-height;
     img {

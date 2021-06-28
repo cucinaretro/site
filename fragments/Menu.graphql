@@ -36,7 +36,7 @@ fragment Menu on Menu {
       stage
     }
   }
-  pageSections {
+  pages {
     ... on Page {
       remoteTypeName: __typename
       remoteId: id

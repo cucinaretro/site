@@ -1,20 +1,32 @@
-import React from 'react';
-import { graphql } from 'gatsby';
+import React from "react"
+import { graphql } from "gatsby"
 
-import Layout from '../components/layout/layout';
-import Switcher from '../components/section/switcher';
+import Layout from "../components/layout/layout"
+import Switcher from "../components/section/switcher"
 
-export default function PageTemplate({ data: { page: { title, contents, localeObject } }, location }) {
+export default function PageTemplate({
+  data: {
+    page: { title, contents, localeObject },
+  },
+  location,
+}) {
   return (
     <Layout title={title} location={location} locale={localeObject}>
-      {contents && contents.map((content) => <Switcher key={content.id} content={content} />)}
+      {contents &&
+        contents.map((content) => (
+          <Switcher key={content.id} content={content} />
+        ))}
     </Layout>
-  );
+  )
 }
 
 export const pageQuery = graphql`
   query PageBySlug($slug: String!, $locale: GraphCMS_Locale!) {
-    page: graphCmsPage(slug: { eq: $slug }, locale: { eq: $locale }, stage: { eq: PUBLISHED }) {
+    page: graphCmsPage(
+      slug: { eq: $slug }
+      locale: { eq: $locale }
+      stage: { eq: PUBLISHED }
+    ) {
       title
       locale
       localeObject {
@@ -30,6 +42,10 @@ export const pageQuery = graphql`
           subtitle
           content {
             html
+          }
+          videos: videoEmbeds {
+            url
+            id
           }
         }
         ... on GraphCMS_Place {
@@ -82,4 +98,4 @@ export const pageQuery = graphql`
       }
     }
   }
-`;
+`

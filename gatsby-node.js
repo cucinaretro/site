@@ -53,6 +53,29 @@ exports.createResolvers = ({ createResolvers }) => {
         },
       },
     },
+    GraphCMS_Content: {
+      videoEmbeds: {
+        type: "[Video!]!",
+        resolve: ({ videos }) => {
+          const results = []
+
+          videos.map((video) => {
+            const matches = video.match(
+              /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/
+            )
+
+            if (typeof matches[1] !== "undefined") {
+              results.push({
+                url: video,
+                id: matches[1],
+              })
+            }
+          })
+
+          return results
+        },
+      },
+    },
   }
 
   createResolvers(resolvers)
@@ -64,6 +87,10 @@ exports.createSchemaCustomization = ({ actions: { createTypes } }) => {
       language: String!
       culture: String!
       path: String!
+    }
+    type Video {
+      url: String!
+      id: String!
     }
   `
   createTypes(typeDefs)

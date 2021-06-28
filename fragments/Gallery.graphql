@@ -35,7 +35,7 @@ fragment Gallery on Gallery {
       stage
     }
   }
-  pageSections {
+  pages {
     ... on Page {
       remoteTypeName: __typename
       remoteId: id

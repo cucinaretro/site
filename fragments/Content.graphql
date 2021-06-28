@@ -45,7 +45,8 @@ fragment Content on Content {
       }
     }
   }
-  pageSections {
+  videos
+  pages {
     ... on Page {
       remoteTypeName: __typename
       remoteId: id

@@ -32,7 +32,7 @@ fragment Asset on Asset {
   width
   size
   mimeType
-  itemsGallery {
+  galleries {
     ... on Gallery {
       remoteTypeName: __typename
       remoteId: id
