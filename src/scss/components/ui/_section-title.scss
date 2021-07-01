@@ -1,0 +1,14 @@
+@import "../../variables";
+
+.section-title {
+  h2 {
+    &.title {
+      margin-bottom: $size-1;
+    }
+  }
+  h3 {
+    &.subtitle {
+      margin-bottom: $size-2;
+    }
+  }
+}

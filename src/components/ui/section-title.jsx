@@ -2,9 +2,11 @@ import React from "react"
 import { Link } from "gatsby"
 import classnames from "classnames"
 
+import "../../scss/components/ui/_section-title.scss"
+
 export default function SectionTitle({ title, subtitle, link, centered }) {
   return (
-    <div className="container">
+    <div className={classnames("container", "section-title")}>
       {title && (
         <h2
           className={classnames("title", {
