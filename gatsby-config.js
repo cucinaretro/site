@@ -1,10 +1,6 @@
 require("dotenv").config()
 
 module.exports = {
-  flags: {
-    PRESERVE_WEBPACK_CACHE: true,
-    FAST_DEV: true,
-  },
   siteMetadata: {
     title: process.env.NAME,
     author: process.env.OWNER_COMPANY,
