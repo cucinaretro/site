@@ -15,7 +15,7 @@
     "@pittica/gatsby-plugin-utils": "^1.0.1",
     "@pittica/scss-functions": "^1.1.1",
     "classnames": "^2.3.1",
-    "gatsby": "^3.11.1",
+    "gatsby": "^3.11.0",
     "gatsby-plugin-gdpr-cookies": "^2.0.6",
     "gatsby-plugin-htaccess": "^1.4.0",
     "gatsby-plugin-image": "^1.11.0",
@@ -43,7 +43,7 @@
   "devDependencies": {
     "bulma": "^0.9.3",
     "gatsby-cli": "^3.11.0",
-    "node-sass": "^6.0.1",
+    "node-sass": "^5.0.0",
     "prettier": "^2.3.2"
   },
   "homepage": "https://cucinaretro.it",
