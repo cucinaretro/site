@@ -4,7 +4,7 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout/layout"
 import Switcher from "../components/section/switcher"
 
-export default function PageTemplate({
+export default function Page({
   data: {
     page: { title, contents, localeObject },
   },
@@ -40,6 +40,7 @@ export const pageQuery = graphql`
           remoteTypeName
           title
           subtitle
+          template
           content {
             html
           }

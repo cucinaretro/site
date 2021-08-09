@@ -3,29 +3,8 @@ fragment Content on Content {
   locale
   remoteId: id
   createdAt(variation: COMBINED)
-  createdBy {
-    ... on User {
-      remoteTypeName: __typename
-      remoteId: id
-      stage
-    }
-  }
   updatedAt(variation: COMBINED)
-  updatedBy {
-    ... on User {
-      remoteTypeName: __typename
-      remoteId: id
-      stage
-    }
-  }
   publishedAt(variation: COMBINED)
-  publishedBy {
-    ... on User {
-      remoteTypeName: __typename
-      remoteId: id
-      stage
-    }
-  }
   title
   subtitle
   content {
@@ -46,6 +25,28 @@ fragment Content on Content {
     }
   }
   videos
+  createdBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  updatedBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  publishedBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  template
   pages {
     ... on Page {
       remoteTypeName: __typename

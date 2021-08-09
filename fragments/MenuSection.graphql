@@ -3,29 +3,8 @@ fragment MenuSection on MenuSection {
   locale
   remoteId: id
   createdAt(variation: COMBINED)
-  createdBy {
-    ... on User {
-      remoteTypeName: __typename
-      remoteId: id
-      stage
-    }
-  }
   updatedAt(variation: COMBINED)
-  updatedBy {
-    ... on User {
-      remoteTypeName: __typename
-      remoteId: id
-      stage
-    }
-  }
   publishedAt(variation: COMBINED)
-  publishedBy {
-    ... on User {
-      remoteTypeName: __typename
-      remoteId: id
-      stage
-    }
-  }
   title
   description {
     ... on RichText {
@@ -33,6 +12,28 @@ fragment MenuSection on MenuSection {
       html
       markdown
       text
+    }
+  }
+  notes
+  createdBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  updatedBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  publishedBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
     }
   }
   entries {
@@ -43,7 +44,6 @@ fragment MenuSection on MenuSection {
       stage
     }
   }
-  notes
   menu {
     ... on Menu {
       remoteTypeName: __typename

@@ -1,0 +1,30 @@
+@import "../../../variables";
+
+.cook {
+  background: $white url("../../../../images/section/cook-bg.jpg") no-repeat center center;
+  background-attachment: fixed;
+  background-size: cover;
+  padding-top: $size-1;
+  .content {
+    color: $white;
+    font-size: $size-5;
+    .title {
+      font-family: $family-secondary;
+      font-size: $size-1;
+      text-transform: uppercase;
+      letter-spacing: $size-7;
+      color: $white;
+    }
+    .subtitle {
+      font-family: $family-secondary;
+      font-size: $size-2;
+      color: $white;
+      letter-spacing: $size-7;
+    }
+  }
+  .graphic {
+    min-height: 80vh;
+    background: transparent url("../../../../images/section/cook.png") no-repeat bottom right;
+    background-size: contain;
+  }
+}

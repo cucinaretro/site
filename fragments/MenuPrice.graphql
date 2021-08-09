@@ -3,6 +3,10 @@ fragment MenuPrice on MenuPrice {
   locale
   remoteId: id
   createdAt(variation: COMBINED)
+  updatedAt(variation: COMBINED)
+  publishedAt(variation: COMBINED)
+  price
+  notes
   createdBy {
     ... on User {
       remoteTypeName: __typename
@@ -10,7 +14,6 @@ fragment MenuPrice on MenuPrice {
       stage
     }
   }
-  updatedAt(variation: COMBINED)
   updatedBy {
     ... on User {
       remoteTypeName: __typename
@@ -18,7 +21,6 @@ fragment MenuPrice on MenuPrice {
       stage
     }
   }
-  publishedAt(variation: COMBINED)
   publishedBy {
     ... on User {
       remoteTypeName: __typename
@@ -26,8 +28,6 @@ fragment MenuPrice on MenuPrice {
       stage
     }
   }
-  price
-  notes
   menuEntry {
     ... on MenuEntry {
       remoteTypeName: __typename

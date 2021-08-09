@@ -3,6 +3,9 @@ fragment Gallery on Gallery {
   locale
   remoteId: id
   createdAt(variation: COMBINED)
+  updatedAt(variation: COMBINED)
+  publishedAt(variation: COMBINED)
+  title
   createdBy {
     ... on User {
       remoteTypeName: __typename
@@ -10,7 +13,6 @@ fragment Gallery on Gallery {
       stage
     }
   }
-  updatedAt(variation: COMBINED)
   updatedBy {
     ... on User {
       remoteTypeName: __typename
@@ -18,7 +20,6 @@ fragment Gallery on Gallery {
       stage
     }
   }
-  publishedAt(variation: COMBINED)
   publishedBy {
     ... on User {
       remoteTypeName: __typename
@@ -26,7 +27,6 @@ fragment Gallery on Gallery {
       stage
     }
   }
-  title
   items {
     ... on Asset {
       remoteTypeName: __typename

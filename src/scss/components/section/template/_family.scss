@@ -1,0 +1,14 @@
+@import "../../../variables";
+
+.family {
+  margin-top: $size-1;
+  margin-bottom: $size-1;
+  .title {
+    font-family: $family-secondary;
+    font-size: $size-1;
+    text-transform: uppercase;
+    letter-spacing: $size-7;
+    text-align: right;
+    padding: $size-2;
+  }
+}

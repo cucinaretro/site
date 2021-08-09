@@ -1,13 +1,13 @@
 import React from "react"
 
 import Menu from "./menu"
-import Content from "./content"
 import Place from "./place"
+import Template from "./template"
 
 export default function Switcher({ content }) {
   switch (content.remoteTypeName) {
     case "Content":
-      return <Content content={content} />
+      return <Template content={content}></Template>
     case "Menu":
       return <Menu content={content} />
     case "Place":

@@ -3,29 +3,8 @@ fragment MenuEntry on MenuEntry {
   locale
   remoteId: id
   createdAt(variation: COMBINED)
-  createdBy {
-    ... on User {
-      remoteTypeName: __typename
-      remoteId: id
-      stage
-    }
-  }
   updatedAt(variation: COMBINED)
-  updatedBy {
-    ... on User {
-      remoteTypeName: __typename
-      remoteId: id
-      stage
-    }
-  }
   publishedAt(variation: COMBINED)
-  publishedBy {
-    ... on User {
-      remoteTypeName: __typename
-      remoteId: id
-      stage
-    }
-  }
   name
   description {
     ... on RichText {
@@ -36,6 +15,27 @@ fragment MenuEntry on MenuEntry {
     }
   }
   vegan
+  createdBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  updatedBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  publishedBy {
+    ... on User {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
   prices {
     ... on MenuPrice {
       remoteTypeName: __typename

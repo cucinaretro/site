@@ -1,0 +1,22 @@
+@import "../../variables";
+
+.place {
+  margin-top: $size-1;
+  margin-bottom: $size-1;
+  .title {
+    font-family: $family-secondary;
+    font-size: $size-2;
+    text-transform: uppercase;
+    letter-spacing: $size-7;
+  }
+  .content {
+    .section {
+      font-size: $size-5;
+    }
+  }
+  .leaflet-container {
+    height: 50vh;
+    z-index: 0;
+    margin-top: $size-1;
+  }
+}
