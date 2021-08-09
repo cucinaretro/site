@@ -11,7 +11,8 @@ export default function Switcher({ content }) {
     case "Menu":
       return <Menu content={content} />
     case "Place":
-      return <Place content={content} />
+      // return <Place content={content} />
+      return null
     default:
       return null
   }
