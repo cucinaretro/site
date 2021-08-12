@@ -44,7 +44,8 @@
     "bulma": "^0.9.3",
     "gatsby-cli": "^3.11.0",
     "node-sass": "^5.0.0",
-    "prettier": "^2.3.2"
+    "prettier": "^2.3.2",
+    "@netlify/plugin-gatsby": "^1.0.3"
   },
   "homepage": "https://cucinaretro.it",
   "keywords": [

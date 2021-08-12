@@ -1,27 +1,64 @@
 import React from "react"
 import { graphql } from "gatsby"
+import { Seo } from "@pittica/gatsby-plugin-seo"
 
-import Layout from "../components/layout/layout"
+import Navbar from "../components/nav/navbar"
+import Footer from "../components/ui/footer"
+import Main from "../components/ui/main"
 import Switcher from "../components/section/switcher"
 
 export default function Page({
   data: {
-    page: { title, contents, localeObject },
+    navigation,
+    page: { title, description, contents, localeObject },
   },
   location,
 }) {
   return (
-    <Layout title={title} location={location} locale={localeObject}>
-      {contents &&
-        contents.map((content) => (
-          <Switcher key={content.id} content={content} />
-        ))}
-    </Layout>
+    <div>
+      <Seo title={title} description={description} path={location.pathname} />
+      <Navbar
+        title={navigation.title}
+        links={navigation.links}
+        location={location}
+        locale={localeObject}
+      />
+      <Main>
+        {contents &&
+          contents.map((content) => (
+            <Switcher key={content.id} content={content} />
+          ))}
+      </Main>
+      <Footer />
+    </div>
   )
 }
 
 export const pageQuery = graphql`
   query PageBySlug($slug: String!, $locale: GraphCMS_Locale!) {
+    navigation: graphCmsNavigation(
+      slug: { eq: "top" }
+      stage: { eq: PUBLISHED }
+      locale: { eq: $locale }
+    ) {
+      title
+      links {
+        ... on GraphCMS_Page {
+          id
+          slug
+          pageTitle: title
+          remotePath
+          remoteTypeName
+        }
+        ... on GraphCMS_NavigationLink {
+          id
+          uri
+          title
+          sticky
+          remoteTypeName
+        }
+      }
+    }
     page: graphCmsPage(
       slug: { eq: $slug }
       locale: { eq: $locale }
@@ -29,6 +66,7 @@ export const pageQuery = graphql`
     ) {
       title
       locale
+      description
       localeObject {
         language
         culture

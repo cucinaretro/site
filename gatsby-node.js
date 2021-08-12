@@ -18,38 +18,49 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
             culture
             path
           }
+          remotePath
         }
       }
     }
   `)
 
-  pages.nodes.forEach(({ slug, updatedAt, locale, localeObject }) => {
-    const page = slug !== "home" ? slug : ""
-
-    createPage({
-      path: `${localeObject.path}/${page}`,
-      component: path.resolve(`./src/templates/page.jsx`),
-      context: {
-        slug,
-        updatedAt,
-        locale,
-        localeObject,
-      },
-    })
-  })
+  pages.nodes.forEach(
+    ({ slug, updatedAt, locale, localeObject, remotePath }) => {
+      createPage({
+        path: remotePath,
+        component: path.resolve(`./src/templates/page.jsx`),
+        context: {
+          slug,
+          updatedAt,
+          locale,
+          localeObject,
+        },
+      })
+    }
+  )
 }
 
 exports.createResolvers = ({ createResolvers }) => {
+  const lc = (locale) => {
+    const lc = formatLocale(locale)
+
+    lc.path = lc.language === process.env.LOCALE ? "" : `/${lc.language}`
+
+    return lc
+  }
+
   const resolvers = {
     GraphCMS_Page: {
       localeObject: {
         type: "Locale",
-        resolve: ({ locale }) => {
-          const lc = formatLocale(locale)
+        resolve: ({ locale }) => lc(locale),
+      },
+      remotePath: {
+        type: "String",
+        resolve: ({ locale, slug }) => {
+          const lo = lc(locale)
 
-          lc.path = lc.language === process.env.LOCALE ? "" : `/${lc.language}`
-
-          return lc
+          return `${lo.path}/${slug !== "home" ? slug : ""}`
         },
       },
     },

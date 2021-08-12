@@ -1,4 +1,4 @@
-fragment Page on Page {
+fragment Navigation on Navigation {
   stage
   locale
   remoteId: id
@@ -7,7 +7,6 @@ fragment Page on Page {
   publishedAt(variation: COMBINED)
   title
   slug
-  description
   createdBy {
     ... on User {
       remoteTypeName: __typename
@@ -29,34 +28,14 @@ fragment Page on Page {
       stage
     }
   }
-  navigations {
-    ... on Navigation {
+  links {
+    ... on NavigationLink {
       remoteTypeName: __typename
       remoteId: id
       locale
       stage
     }
-  }
-  contents {
-    ... on Content {
-      remoteTypeName: __typename
-      remoteId: id
-      locale
-      stage
-    }
-    ... on Gallery {
-      remoteTypeName: __typename
-      remoteId: id
-      locale
-      stage
-    }
-    ... on Menu {
-      remoteTypeName: __typename
-      remoteId: id
-      locale
-      stage
-    }
-    ... on Place {
+    ... on Page {
       remoteTypeName: __typename
       remoteId: id
       locale

@@ -1,31 +1,29 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Link } from "gatsby"
 import classnames from "classnames"
 
 import "../../scss/components/nav/_navbar-item.scss"
 
-export default function NavbarItem({ to, title, location, sticky }) {
+export default function NavbarLink({ href, title, location, sticky }) {
   return (
-    <Link
-      to={to}
+    <a
+      href={href}
       className={classnames("navbar-item", {
-        "is-active": location.pathname === to,
         sticky,
       })}
     >
       <span>{title}</span>
-    </Link>
+    </a>
   )
 }
 
-NavbarItem.propTypes = {
-  to: PropTypes.string,
+NavbarLink.propTypes = {
+  href: PropTypes.string,
   title: PropTypes.string.isRequired,
   location: PropTypes.object,
   sticky: PropTypes.bool.isRequired,
 }
 
-NavbarItem.defaultProps = {
+NavbarLink.defaultProps = {
   sticky: false,
 }

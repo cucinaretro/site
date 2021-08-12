@@ -4,6 +4,7 @@ import Content from "./content"
 import Cook from "./template/cook"
 import Family from "./template/family"
 import Lady from "./template/lady"
+import Mom from "./template/mom"
 
 export default function Switcher({ content }) {
   switch (content.template) {
@@ -13,6 +14,8 @@ export default function Switcher({ content }) {
       return <Family content={content} />
     case "lady":
       return <Lady content={content} />
+    case "mom":
+      return <Mom content={content} />
     default:
       return <Content content={content} />
   }
