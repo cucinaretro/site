@@ -17,12 +17,14 @@ export default function Page({
   return (
     <div>
       <Seo title={title} description={description} path={location.pathname} />
-      <Navbar
-        title={navigation.title}
-        links={navigation.links}
-        location={location}
-        locale={localeObject}
-      />
+      {navigation && (
+        <Navbar
+          title={navigation.title}
+          links={navigation.links}
+          location={location}
+          locale={localeObject}
+        />
+      )}
       <Main>
         {contents &&
           contents.map((content) => (
