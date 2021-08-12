@@ -1,6 +1,5 @@
 import React from "react"
 import classnames from "classnames"
-import { StaticImage } from "gatsby-plugin-image"
 
 import Video from "../../ui/video"
 
