@@ -135,6 +135,20 @@ export const pageQuery = graphql`
         ... on GraphCMS_Gallery {
           id
           remoteTypeName
+          title
+          items {
+            title
+            localFile {
+              childImageSharp {
+                gatsbyImageData(
+                  width: 480
+                  height: 480
+                  placeholder: BLURRED
+                  formats: [AUTO, WEBP, AVIF]
+                )
+              }
+            }
+          }
         }
       }
     }

@@ -10,7 +10,7 @@ import "../../scss/components/section/_menu.scss"
 export default function Menu({ content: { name, sections } }) {
   return (
     <article
-      className="food-menu"
+      className="menu"
       itemProp="menu"
       itemScope=""
       itemType="https://schema.org/Menu"

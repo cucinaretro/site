@@ -11,6 +11,7 @@ fragment Asset on Asset {
   width
   size
   mimeType
+  title
   createdBy {
     ... on User {
       remoteTypeName: __typename

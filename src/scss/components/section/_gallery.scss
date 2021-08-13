@@ -1,0 +1,13 @@
+@import "../../variables";
+
+.gallery {
+  .title {
+    font-family: $family-secondary;
+    font-size: $size-2;
+    text-transform: uppercase;
+    letter-spacing: $size-7;
+  }
+  .InfiniteCarouselArrowIcon {
+    border-color: $primary;
+  }
+}

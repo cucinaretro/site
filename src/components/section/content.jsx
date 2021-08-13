@@ -1,25 +1,22 @@
 import React from "react"
 
-import Section from "../ui/section"
-import Video from "../ui/video"
+import Default from "./content/default"
+import Cook from "./content/cook"
+import Family from "./content/family"
+import Lady from "./content/lady"
+import Mom from "./content/mom"
 
-import "../../scss/components/section/_content.scss"
-
-export default function Content({
-  content: { title, subtitle, content, videos },
-}) {
-  return (
-    <article className="page-content">
-      <Section title={title} subtitle={subtitle}>
-        {content && (
-          <div
-            className="text"
-            dangerouslySetInnerHTML={{ __html: content.html }}
-          />
-        )}
-        {videos &&
-          videos.map(({ id }, i) => <Video id={id} key={`${id}-${i}`} />)}
-      </Section>
-    </article>
-  )
+export default function Switcher({ content }) {
+  switch (content.template) {
+    case "cook":
+      return <Cook content={content} />
+    case "family":
+      return <Family content={content} />
+    case "lady":
+      return <Lady content={content} />
+    case "mom":
+      return <Mom content={content} />
+    default:
+      return <Default content={content} />
+  }
 }

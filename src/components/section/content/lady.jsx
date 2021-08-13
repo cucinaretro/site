@@ -2,9 +2,9 @@ import React from "react"
 import classnames from "classnames"
 import { StaticImage } from "gatsby-plugin-image"
 
-import Video from "../../ui/video"
+import VideoSlider from "../../ui/video-slider"
 
-import "../../../scss/components/section/template/_lady.scss"
+import "../../../scss/components/section/content/_lady.scss"
 
 export default function Cook({
   content: { title, subtitle, content, videos },
@@ -32,8 +32,7 @@ export default function Cook({
             dangerouslySetInnerHTML={{ __html: content.html }}
           />
         )}
-        {videos &&
-          videos.map(({ id }, i) => <Video id={id} key={`${id}-${i}`} />)}
+        <VideoSlider items={videos} />
       </div>
     </div>
   )
