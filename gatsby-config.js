@@ -89,18 +89,11 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-htaccess`,
+      resolve: `@pittica/gatsby-plugin-cookiehub`,
       options: {
-        https: true,
-        www: true,
-        SymLinksIfOwnerMatch: true,
-        host: process.env.HOST,
-        ErrorDocument: `
-          ErrorDocument 401 /error/401/index.html
-          ErrorDocument 403 /error/403/index.html
-          ErrorDocument 404 /error/404/index.html
-          ErrorDocument 500 /error/500/index.html
-        `,
+        code: "5fa12635",
+        debug: (process.env.ENV || process.env.NODE_ENV) !== "production",
+        cookie: "cucinaretro-gdpr",
       },
     },
     `gatsby-plugin-sass`,

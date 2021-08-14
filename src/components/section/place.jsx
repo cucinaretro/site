@@ -32,8 +32,8 @@ export default function Place({
       {typeof window !== "undefined" && (
         <MapContainer center={[latitude, longitude]} zoom={13}>
           <TileLayer
-            url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
+            attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'
           />
           <Marker
             position={[latitude, longitude]}

@@ -11,6 +11,7 @@ export default function Slider({ children, items }) {
     const getDeviceType = () => {
       if (typeof navigator !== "undefined") {
         const md = new MobileDetect(navigator.userAgent)
+
         if (md.tablet()) {
           return "tablet"
         } else if (md.mobile()) {
