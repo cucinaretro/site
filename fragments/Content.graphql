@@ -46,6 +46,14 @@ fragment Content on Content {
       stage
     }
   }
+  images {
+    ... on Asset {
+      remoteTypeName: __typename
+      remoteId: id
+      locale
+      stage
+    }
+  }
   template
   pages {
     ... on Page {

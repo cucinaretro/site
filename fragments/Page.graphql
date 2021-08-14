@@ -44,12 +44,6 @@ fragment Page on Page {
       locale
       stage
     }
-    ... on Gallery {
-      remoteTypeName: __typename
-      remoteId: id
-      locale
-      stage
-    }
     ... on Menu {
       remoteTypeName: __typename
       remoteId: id

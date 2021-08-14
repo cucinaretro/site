@@ -7,6 +7,9 @@
   }
   .title {
     line-height: $size-1;
+    font-family: $family-secondary;
+    font-size: $size-1;
+    text-transform: uppercase;
   }
   .subtitle {
     line-height: $size-2;

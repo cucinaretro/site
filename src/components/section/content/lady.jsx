@@ -3,11 +3,12 @@ import classnames from "classnames"
 import { StaticImage } from "gatsby-plugin-image"
 
 import VideoSlider from "../../ui/video-slider"
+import ImageSlider from "../../ui/image-slider"
 
 import "../../../scss/components/section/content/_lady.scss"
 
 export default function Cook({
-  content: { title, subtitle, content, videos },
+  content: { title, subtitle, content, videos, images },
 }) {
   return (
     <div className={classnames("columns", "is-vcentered", "lady")}>
@@ -32,6 +33,7 @@ export default function Cook({
             dangerouslySetInnerHTML={{ __html: content.html }}
           />
         )}
+        <ImageSlider items={images} />
         <VideoSlider items={videos} />
       </div>
     </div>

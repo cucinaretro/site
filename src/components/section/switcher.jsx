@@ -2,7 +2,6 @@ import React from "react"
 
 import Menu from "./menu"
 import Place from "./place"
-import Gallery from "./gallery"
 import Content from "./content"
 
 export default function Switcher({ content }) {
@@ -13,8 +12,6 @@ export default function Switcher({ content }) {
       return <Menu content={content} />
     case "Place":
       return <Place content={content} />
-    case "Gallery":
-      return <Gallery content={content} />
     default:
       return null
   }

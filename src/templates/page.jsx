@@ -88,6 +88,19 @@ export const pageQuery = graphql`
             url
             id
           }
+          images {
+            title
+            localFile {
+              childImageSharp {
+                gatsbyImageData(
+                  width: 480
+                  height: 480
+                  placeholder: BLURRED
+                  formats: [AUTO, WEBP, AVIF]
+                )
+              }
+            }
+          }
         }
         ... on GraphCMS_Place {
           id
@@ -130,24 +143,6 @@ export const pageQuery = graphql`
               vegan
             }
             notes
-          }
-        }
-        ... on GraphCMS_Gallery {
-          id
-          remoteTypeName
-          title
-          items {
-            title
-            localFile {
-              childImageSharp {
-                gatsbyImageData(
-                  width: 480
-                  height: 480
-                  placeholder: BLURRED
-                  formats: [AUTO, WEBP, AVIF]
-                )
-              }
-            }
           }
         }
       }
