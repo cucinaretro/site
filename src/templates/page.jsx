@@ -2,10 +2,10 @@ import React from "react"
 import { graphql } from "gatsby"
 import { Seo } from "@pittica/gatsby-plugin-seo"
 
-import Navbar from "../components/nav/navbar"
 import Footer from "../components/ui/footer"
 import Main from "../components/ui/main"
 import Switcher from "../components/section/switcher"
+import TopMenu from "../components/ui/top-menu"
 
 export default function Page({
   data: {
@@ -18,7 +18,7 @@ export default function Page({
     <div>
       <Seo title={title} description={description} path={location.pathname} />
       {navigation && (
-        <Navbar
+        <TopMenu
           title={navigation.title}
           links={navigation.links}
           location={location}

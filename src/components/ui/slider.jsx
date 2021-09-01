@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-import classnames from "classnames"
+import classNames from "classnames"
 import MobileDetect from "mobile-detect"
 import Carousel from "react-multi-carousel"
 
@@ -48,7 +48,7 @@ export default function Slider({ children, items }) {
           responsive={responsive}
           ssr={true}
           infinite={true}
-          containerClass={classnames("first-carousel-container", "container")}
+          containerClass={classNames("first-carousel-container", "container")}
           deviceType={getDeviceType()}
         >
           {children}

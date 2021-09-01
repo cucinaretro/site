@@ -1,5 +1,5 @@
 import React from "react"
-import classnames from "classnames"
+import classNames from "classnames"
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 import { Icon, Point } from "leaflet"
 
@@ -20,10 +20,10 @@ export default function Place({
   return (
     <article className="place">
       <div className="columns">
-        <div className={classnames("column", "is-half")}>
+        <div className={classNames("column", "is-half")}>
           <Section title={title} />
         </div>
-        <div className={classnames("column", "is-half", "content")}>
+        <div className={classNames("column", "is-half", "content")}>
           <Section>
             <Renderer>{notes}</Renderer>
           </Section>

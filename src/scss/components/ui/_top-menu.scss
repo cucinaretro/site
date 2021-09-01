@@ -1,0 +1,81 @@
+@import "@pittica/scss-functions";
+@import "../../variables";
+
+@import "~bulma/sass/utilities/mixins";
+
+.top-menu {
+  &.navbar {
+    .navbar-menu {
+      &.is-active {
+        position: relative;
+        z-index: 0;
+        @include until($desktop) {
+          background-color: $primary-invert;
+        }
+      }
+      .navbar-item {
+        text-transform: uppercase;
+        font-family: $family-secondary;
+        letter-spacing: 0.1rem;
+        font-size: $size-6 + $size-7;
+        text-align: right;
+        padding-left: $size-4;
+        padding-right: $size-4;
+        @include transition();
+        @include until($desktop) {
+          color: $primary;
+        }
+        &.sticky {
+          span {
+            border: ($size-7 / 5) solid $primary-invert;
+            padding: $size-7;
+            @include until($desktop) {
+              padding: 0;
+              border: none;
+            }
+          }
+        }
+      }
+    }
+    .navbar-brand {
+      .navbar-logo {
+        height: $navbar-height;
+        img {
+          max-height: $navbar-height;
+        }
+      }
+      .navbar-burger {
+        &.is-active {
+          background-color: $primary-invert;
+          color: $primary;
+          span {
+            &:nth-child(1) {
+              left: $navbar-burger-width;
+              top: ($navbar-burger-width * 1.25);
+            }
+            &:nth-child(3) {
+              left: $navbar-burger-width;
+              top: ($navbar-burger-width * 1.5);
+            }
+          }
+        }
+        &:hover {
+          color: $orange;
+        }
+        span {
+          height: $navbar-burger-height;
+          width: $navbar-burger-width;
+          &:nth-child(1) {
+            top: $navbar-burger-width + ($navbar-burger-height / 2);
+          }
+          &:nth-child(2) {
+            top: ($navbar-burger-width * 1.5) + ($navbar-burger-height / 2);
+          }
+          &:nth-child(3) {
+            top: ($navbar-burger-width * 2) + ($navbar-burger-height / 2);
+          }
+        }
+      }
+    }
+  }
+}

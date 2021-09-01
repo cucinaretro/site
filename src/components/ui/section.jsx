@@ -1,5 +1,5 @@
 import React from "react"
-import classnames from "classnames"
+import classNames from "classnames"
 
 import SectionTitle from "./section-title"
 
@@ -15,7 +15,7 @@ export default function Section({
 }) {
   return (
     <section
-      className={classnames("section", className)}
+      className={classNames("section", className)}
       itemProp={itemProp}
       itemScope={itemScope}
       itemType={itemType}

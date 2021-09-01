@@ -1,6 +1,6 @@
 import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import classnames from "classnames"
+import classNames from "classnames"
 import { SocialFollow } from "@pittica/gatsby-plugin-seo"
 
 import logo from "../../images/footer/logo.svg"
@@ -45,11 +45,11 @@ export default function Footer() {
       <footer className="footer">
         <div className="container">
           <div className="columns">
-            <div className={classnames("column", "is-two-quarters")}>
+            <div className={classNames("column", "is-two-quarters")}>
               <img src={logo} alt="Cucina Retrò" width="307" height="159" />
             </div>
             <div
-              className={classnames("column", "is-one-quarter", "company")}
+              className={classNames("column", "is-one-quarter", "company")}
               itemScope=""
               itemType="https://schema.org/Organization"
             >
@@ -101,7 +101,7 @@ export default function Footer() {
                 </div>
               )}
             </div>
-            <SocialFollow className={classnames("column", "one-quarter")} />
+            <SocialFollow className={classNames("column", "one-quarter")} />
           </div>
           <div>
             &copy; {new Date().getFullYear()}, {organization.company}

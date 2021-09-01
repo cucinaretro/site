@@ -1,5 +1,5 @@
 import React from "react"
-import classnames from "classnames"
+import classNames from "classnames"
 
 import VideoSlider from "../../ui/video-slider"
 import ImageSlider from "../../ui/image-slider"
@@ -10,8 +10,8 @@ export default function Mom({
   content: { title, subtitle, content, videos, images },
 }) {
   return (
-    <div className={classnames("columns", "mom")}>
-      <div className={classnames("column", "is-half", "content")}>
+    <div className={classNames("columns", "mom")}>
+      <div className={classNames("column", "is-half", "content")}>
         {title && <h2 className="title">{title}</h2>}
         {subtitle && <h3 className="subtitle">{subtitle}</h3>}
         {content && (
@@ -23,7 +23,7 @@ export default function Mom({
         <ImageSlider items={images} />
         <VideoSlider items={videos} />
       </div>
-      <div className={classnames("column", "is-half", "graphic")} />
+      <div className={classNames("column", "is-half", "graphic")} />
     </div>
   )
 }

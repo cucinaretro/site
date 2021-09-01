@@ -1,5 +1,5 @@
 import React from "react"
-import classnames from "classnames"
+import classNames from "classnames"
 import { StaticImage } from "gatsby-plugin-image"
 
 import VideoSlider from "../../ui/video-slider"
@@ -12,8 +12,8 @@ export default function Cook({
 }) {
   return (
     <div className="family">
-      <div className={classnames("columns", "is-vcentered")}>
-        <div className={classnames("column", "is-half", "content")}>
+      <div className={classNames("columns", "is-vcentered")}>
+        <div className={classNames("column", "is-half", "content")}>
           {title && <h2 className="title">{title}</h2>}
           {subtitle && <h3 className="subtitle">{subtitle}</h3>}
           {content && (
@@ -25,7 +25,7 @@ export default function Cook({
           <ImageSlider items={images} />
           <VideoSlider items={videos} />
         </div>
-        <div className={classnames("column", "is-half", "graphic")}>
+        <div className={classNames("column", "is-half", "graphic")}>
           <StaticImage
             src="../../../images/section/family.jpg"
             alt="Cucina Retrò"
