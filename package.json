@@ -12,8 +12,8 @@
     "@mdx-js/react": "^1.6.22",
     "@pittica/gatsby-plugin-cookiehub": "^1.0.6",
     "@pittica/gatsby-plugin-navigation": "^1.2.0",
-    "@pittica/gatsby-plugin-seo": "^2.1.5",
-    "@pittica/gatsby-plugin-utils": "^1.1.0",
+    "@pittica/gatsby-plugin-seo": "^2.2.1",
+    "@pittica/gatsby-plugin-utils": "^1.1.1",
     "@pittica/scss-functions": "^1.1.1",
     "classnames": "^2.3.1",
     "gatsby": "^3.13.0",
@@ -38,9 +38,9 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
-    "react-leaflet": "^3.2.1",
-    "react-multi-carousel": "^2.6.3",
-    "validator": "^13.6.0"
+    "react-leaflet": "^3.2.2",
+    "react-multi-carousel": "^2.6.5",
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "@netlify/plugin-gatsby": "^1.0.3",
