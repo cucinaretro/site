@@ -1,47 +1,44 @@
 @import "../../variables";
 
-.footer-container {
+.footer {
+  background: $primary url(../../../images/footer/top.svg) top center repeat-x;
   margin-top: $size-1;
-  .top {
-    background-color: $primary;
-    img {
-      width: 100%;
+  padding-top: $size-1 * 2;
+  .column {
+    background-color: rgba($primary, 0.5);
+  }
+  h2 {
+    font-family: $family-secondary;
+    font-size: $size-2;
+    text-transform: uppercase;
+    margin-bottom: $size-6;
+  }
+  .company {
+    font-size: $size-7;
+    h3 {
+      font-size: $size-6;
+    }
+    address {
+      font-style: normal;
+    }
+    span {
+      font-weight: $weight-bold;
+    }
+    a {
+      color: $primary-invert;
+      text-decoration: underline;
     }
   }
-  .footer {
-    h2 {
-      font-family: $family-secondary;
-      font-size: $size-2;
-      text-transform: uppercase;
-      margin-bottom: $size-6;
-    }
-    .company {
-      font-size: $size-7;
-      h3 {
-        font-size: $size-6;
-      }
-      address {
-        font-style: normal;
+  .social-follow {
+    li {
+      display: inline-block;
+      i {
+        font-size: $size-2;
+        padding-right: $size-3;
+        color: $primary-invert;
       }
       span {
-        font-weight: $weight-bold;
-      }
-      a {
-        color: $primary-invert;
-        text-decoration: underline;
-      }
-    }
-    .social-follow {
-      li {
-        display: inline-block;
-        i {
-          font-size: $size-2;
-          padding-right: $size-3;
-          color: $primary-invert;
-        }
-        span {
-          display: none;
-        }
+        display: none;
       }
     }
   }

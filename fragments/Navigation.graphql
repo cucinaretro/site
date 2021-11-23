@@ -28,7 +28,28 @@ fragment Navigation on Navigation {
       stage
     }
   }
-  links {
+  scheduledIn {
+    ... on ScheduledOperation {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
+  start {
+    ... on NavigationLink {
+      remoteTypeName: __typename
+      remoteId: id
+      locale
+      stage
+    }
+    ... on Page {
+      remoteTypeName: __typename
+      remoteId: id
+      locale
+      stage
+    }
+  }
+  end {
     ... on NavigationLink {
       remoteTypeName: __typename
       remoteId: id

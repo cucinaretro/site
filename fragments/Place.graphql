@@ -41,6 +41,13 @@ fragment Place on Place {
       stage
     }
   }
+  scheduledIn {
+    ... on ScheduledOperation {
+      remoteTypeName: __typename
+      remoteId: id
+      stage
+    }
+  }
   pages {
     ... on Page {
       remoteTypeName: __typename

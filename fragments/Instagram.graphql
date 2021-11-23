@@ -1,4 +1,4 @@
-fragment Content on Content {
+fragment Instagram on Instagram {
   stage
   locale
   remoteId: id
@@ -6,25 +6,7 @@ fragment Content on Content {
   updatedAt(variation: COMBINED)
   publishedAt(variation: COMBINED)
   title
-  subtitle
-  content {
-    ... on ContentContentRichText {
-      raw
-      json
-      html
-      markdown
-      text
-      references {
-        ... on Asset {
-          remoteTypeName: __typename
-          remoteId: id
-          locale
-          stage
-        }
-      }
-    }
-  }
-  videos
+  description
   createdBy {
     ... on User {
       remoteTypeName: __typename
@@ -46,15 +28,6 @@ fragment Content on Content {
       stage
     }
   }
-  images {
-    ... on Asset {
-      remoteTypeName: __typename
-      remoteId: id
-      locale
-      stage
-    }
-  }
-  template
   scheduledIn {
     ... on ScheduledOperation {
       remoteTypeName: __typename

@@ -5,6 +5,9 @@
 
 .top-menu {
   &.navbar {
+    &.is-fixed-top {
+      z-index: 9999;
+    }
     .navbar-menu {
       &.is-active {
         position: relative;
@@ -19,20 +22,21 @@
         letter-spacing: 0.1rem;
         font-size: $size-6 + $size-7;
         text-align: right;
-        padding-left: $size-4;
-        padding-right: $size-4;
+        padding: $size-7 $size-4;
+        margin: $size-7;
         @include transition();
         @include until($desktop) {
           color: $primary;
         }
         &.sticky {
-          span {
-            border: ($size-7 / 5) solid $primary-invert;
-            padding: $size-7;
-            @include until($desktop) {
-              padding: 0;
-              border: none;
-            }
+          border: ($size-7 / 5) solid $primary-invert;
+          @include until($desktop) {
+            border: none;
+          }
+        }
+        .icon-text {
+          @include until($desktop) {
+            display: inline-flex;
           }
         }
       }
@@ -40,31 +44,51 @@
     .navbar-brand {
       .navbar-logo {
         height: $navbar-height;
+        max-width: $navbar-height * 2;
+        margin-right: $navbar-height * 2;
+        padding: $size-7;
         img {
-          max-height: $navbar-height;
+          max-height: $navbar-height - ($size-7 * 2);
+        }
+      }
+      .call-direct {
+        color: $primary-invert;
+        font-family: $family-secondary;
+        font-size: $size-2;
+        text-transform: uppercase;
+        height: $navbar-height;
+        min-width: $navbar-height;
+        display: inline-block;
+        @include until($desktop) {
+          position: absolute;
+          top: 0;
+          right: $navbar-height;
+        }
+        @include from($desktop) {
+          display: none;
+        }
+        span {
+          height: $navbar-height;
+          padding-left: $size-7;
+          padding-right: $size-7;
+          &:not(.icon) {
+            @include until($desktop) {
+              display: none;
+            }
+          }
+          &.icon {
+            width: $navbar-height;
+          }
         }
       }
       .navbar-burger {
-        &.is-active {
-          background-color: $primary-invert;
-          color: $primary;
-          span {
-            &:nth-child(1) {
-              left: $navbar-burger-width;
-              top: ($navbar-burger-width * 1.25);
-            }
-            &:nth-child(3) {
-              left: $navbar-burger-width;
-              top: ($navbar-burger-width * 1.5);
-            }
-          }
-        }
-        &:hover {
-          color: $orange;
-        }
+        position: absolute;
+        top: 0;
+        right: 0;
         span {
           height: $navbar-burger-height;
           width: $navbar-burger-width;
+          left: $navbar-burger-width;
           &:nth-child(1) {
             top: $navbar-burger-width + ($navbar-burger-height / 2);
           }
@@ -73,6 +97,31 @@
           }
           &:nth-child(3) {
             top: ($navbar-burger-width * 2) + ($navbar-burger-height / 2);
+          }
+        }
+        &:hover {
+          span {
+            color: $primary-invert;
+          }
+        }
+        &.is-active {
+          background-color: $primary-invert;
+          color: $primary;
+          span {
+            width: $navbar-burger-width * 1.5;
+            &:nth-child(1) {
+              left: (($navbar-burger-width * 1.5) / 2);
+              top: ($navbar-burger-width * 1.25);
+            }
+            &:nth-child(3) {
+              left: (($navbar-burger-width * 1.5) / 2);
+              top: ($navbar-burger-width * 1.5);
+            }
+          }
+          &:hover {
+            span {
+              color: $primary;
+            }
           }
         }
       }

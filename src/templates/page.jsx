@@ -9,6 +9,11 @@ import TopMenu from "../components/ui/top-menu"
 
 export default function Page({
   data: {
+    site: {
+      siteMetadata: {
+        organization: { phone },
+      },
+    },
     navigation,
     page: { title, description, contents, localeObject },
   },
@@ -20,9 +25,11 @@ export default function Page({
       {navigation && (
         <TopMenu
           title={navigation.title}
-          links={navigation.links}
+          start={navigation.start}
+          end={navigation.end}
           location={location}
           locale={localeObject}
+          phone={phone}
         />
       )}
       <Main>
@@ -38,26 +45,51 @@ export default function Page({
 
 export const pageQuery = graphql`
   query PageBySlug($slug: String!, $locale: GraphCMS_Locale!) {
+    site {
+      siteMetadata {
+        organization {
+          phone
+        }
+      }
+    }
     navigation: graphCmsNavigation(
       slug: { eq: "top" }
       stage: { eq: PUBLISHED }
       locale: { eq: $locale }
     ) {
       title
-      links {
+      start {
         ... on GraphCMS_Page {
           id
+          remoteTypeName
           slug
           pageTitle: title
           remotePath
-          remoteTypeName
         }
         ... on GraphCMS_NavigationLink {
           id
+          remoteTypeName
           uri
           title
           sticky
+          icon
+        }
+      }
+      end {
+        ... on GraphCMS_Page {
+          id
           remoteTypeName
+          slug
+          pageTitle: title
+          remotePath
+        }
+        ... on GraphCMS_NavigationLink {
+          id
+          remoteTypeName
+          uri
+          title
+          sticky
+          icon
         }
       }
     }
@@ -144,6 +176,12 @@ export const pageQuery = graphql`
             }
             notes
           }
+        }
+        ... on GraphCMS_Instagram {
+          id
+          remoteTypeName
+          title
+          description
         }
       }
     }

@@ -20,6 +20,7 @@ module.exports = {
       province: process.env.OWNER_PROVINCE,
       country: process.env.OWNER_COUNTRY,
       email: process.env.OWNER_EMAIL,
+      phone: process.env.OWNER_PHONE,
       taxId: process.env.OWNER_TAX_ID,
       vatId: process.env.OWNER_VAT_ID,
       registryId: process.env.OWNER_REGISTRY_ID,
@@ -91,7 +92,7 @@ module.exports = {
     {
       resolve: `@pittica/gatsby-plugin-cookiehub`,
       options: {
-        code: "5fa12635",
+        code: process.env.COOKIEHUB_CODE,
         debug: (process.env.ENV || process.env.NODE_ENV) !== "production",
         cookie: "cucinaretro-gdpr",
       },
@@ -186,6 +187,14 @@ module.exports = {
             icon: "icon-cucinaretro-facebook",
           },
         },
+      },
+    },
+    {
+      resolve: `@pittica/gatsby-source-instagram`,
+      options: {
+        token: process.env.INSTAGRAM_TOKEN,
+        limit: 9,
+        locale: process.env.LOCALE.toLowerCase(),
       },
     },
     {

@@ -36,21 +36,34 @@
         text-transform: uppercase;
         letter-spacing: $size-6 / 2;
         margin-bottom: $size-2;
-        padding: $size-1;
+        padding: $size-1 $size-7;
+        font-family: $family-secondary;
       }
     }
-    h6 {
-      text-transform: uppercase;
-      font-weight: $weight-bold;
+    .menu-entry {
+      margin-bottom: $size-7;
+      h6 {
+        margin-bottom: 0;
+        font-size: $size-4;
+        font-family: $family-secondary;
+      }
+      .column {
+        padding-bottom: 0;
+      }
+      .price {
+        font-family: $family-secondary;
+        font-size: $size-5;
+      }
     }
     &:after {
       display: block;
-      font-family: cucinaretro;
       content: "\e901";
+      font-family: cucinaretro;
+      color: $primary;
       font-size: $size-1 * 4;
       text-align: center;
       width: 100%;
-      color: $primary;
+      max-height: $size-1 * 4;
     }
     &:nth-child(even) {
       h2 {

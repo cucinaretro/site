@@ -50,7 +50,7 @@ export default function Entry({ entry: { name, description, vegan, prices } }) {
                     <div
                       className={classNames(
                         "column",
-                        "is-8",
+                        "is-9",
                         "price-notes",
                         "has-text-right"
                       )}
@@ -61,8 +61,8 @@ export default function Entry({ entry: { name, description, vegan, prices } }) {
                   )}
                   {value > 0 && (
                     <div
-                      className={classNames("column", "price", "is-4", {
-                        "is-offset-8": !notes,
+                      className={classNames("column", "price", "is-3", {
+                        "is-offset-9": !notes,
                       })}
                       itemProp="price"
                       content={value.toFixed(2)}
