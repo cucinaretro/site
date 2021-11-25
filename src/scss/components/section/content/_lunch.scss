@@ -1,0 +1,27 @@
+@import "../../../variables";
+
+.lunch {
+  .graphic {
+    padding: $size-1 * 2;
+  }
+  .title {
+    font-family: $family-secondary;
+    font-size: $size-1;
+    text-transform: uppercase;
+    letter-spacing: $size-7;
+  }
+  .subtitle {
+    font-family: $family-secondary;
+    font-size: $size-2;
+    letter-spacing: $size-7;
+  }
+  .content {
+    font-size: $size-5;
+    padding: $size-2;
+    .divider {
+      text-align: center;
+      margin-top: $size-2;
+      margin-bottom: $size-2;
+    }
+  }
+}
