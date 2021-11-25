@@ -47,7 +47,7 @@ export default function TopMenu({
   endItems.push({
     link: phoneUri,
     label: "Chiama",
-    className: classNames("is-sticky", "is-hidden-tablet", "is-hidden-mobile"),
+    className: classNames("is-sticky", "is-hidden-mobile"),
     icon: "icon-cucinaretro-phone",
   })
 
