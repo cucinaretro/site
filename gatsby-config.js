@@ -45,20 +45,19 @@ module.exports = {
       options: {
         headers: {
           "/public/**/*.html": [
-            "cache-control: public",
-            "cache-control: max-age=0",
-            "cache-control: must-revalidate",
+            "Cache-Control: public, max-age=0, must-revalidate",
           ],
-          "/sw.js": [
-            "cache-control: public",
-            "cache-control: max-age=0",
-            "cache-control: must-revalidate",
-          ],
+          "/sw.js": ["Cache-Control: public, max-age=0, must-revalidate"],
           "/public/page-data/*": [
-            "cache-control: public",
-            "cache-control: max-age=0",
-            "cache-control: must-revalidate",
+            "Cache-Control: public, max-age=0, must-revalidate",
           ],
+          "**/*.@(eot|otf|ttf|ttc|woff|woff2|font.css)": [
+            "Access-Control-Allow-Origin: *",
+          ],
+          "**/page-data/*": [
+            "Cache-Control: public, max-age=0, must-revalidate",
+          ],
+          "error/*": ["Cache-Control: max-age=300"],
         },
       },
     },

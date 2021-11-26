@@ -16,12 +16,17 @@ export default function Page({
     },
     navigation,
     page: { title, description, contents, localeObject },
+    pageNeutral,
   },
   location,
 }) {
   return (
     <div>
-      <Seo title={title} description={description} path={location.pathname} />
+      <Seo
+        title={title || pageNeutral.title}
+        description={description || pageNeutral.description}
+        path={location.pathname}
+      />
       {navigation && (
         <TopMenu
           title={navigation.title}
@@ -33,10 +38,19 @@ export default function Page({
         />
       )}
       <Main>
-        {contents &&
-          contents.map((content) => (
-            <Switcher key={content.id} content={content} />
-          ))}
+        {pageNeutral.contents.map((element) => {
+          let result = element
+
+          contents.forEach((content) => {
+            if (content.remoteId === element.remoteId) {
+              result = content
+
+              return true
+            }
+          })
+
+          return <Switcher key={result.id} content={result} neutral={element} />
+        })}
       </Main>
       <Footer />
     </div>
@@ -44,6 +58,101 @@ export default function Page({
 }
 
 export const pageQuery = graphql`
+  fragment PageTemplate on GraphCMS_Page {
+    title
+    locale
+    description
+    localeObject {
+      language
+      culture
+      path
+    }
+    contents {
+      ... on GraphCMS_Content {
+        id
+        remoteId
+        remoteTypeName
+        title
+        subtitle
+        template
+        content {
+          html
+        }
+        videos: videoEmbeds {
+          url
+          id
+        }
+        images {
+          title
+          localFile {
+            childImageSharp {
+              gatsbyImageData(
+                width: 480
+                height: 480
+                placeholder: BLURRED
+                formats: [AUTO, WEBP, AVIF]
+              )
+            }
+          }
+        }
+      }
+      ... on GraphCMS_Place {
+        id
+        remoteId
+        remoteTypeName
+        title
+        notes {
+          markdownNode {
+            childMdx {
+              body
+            }
+          }
+        }
+        coordinates {
+          latitude
+          longitude
+        }
+      }
+      ... on GraphCMS_Menu {
+        id
+        remoteId
+        remoteTypeName
+        name
+        sections {
+          id
+          remoteId
+          title
+          description {
+            markdownNode {
+              childMdx {
+                body
+              }
+            }
+          }
+          entries {
+            id
+            remoteId
+            name
+            prices {
+              id
+              remoteId
+              notes
+              price
+            }
+            vegan
+          }
+          notes
+        }
+      }
+      ... on GraphCMS_Instagram {
+        id
+        remoteId
+        remoteTypeName
+        title
+        description
+      }
+    }
+  }
   query PageBySlug($slug: String!, $locale: GraphCMS_Locale!) {
     site {
       siteMetadata {
@@ -98,92 +207,14 @@ export const pageQuery = graphql`
       locale: { eq: $locale }
       stage: { eq: PUBLISHED }
     ) {
-      title
-      locale
-      description
-      localeObject {
-        language
-        culture
-        path
-      }
-      contents {
-        ... on GraphCMS_Content {
-          id
-          remoteTypeName
-          title
-          subtitle
-          template
-          content {
-            html
-          }
-          videos: videoEmbeds {
-            url
-            id
-          }
-          images {
-            title
-            localFile {
-              childImageSharp {
-                gatsbyImageData(
-                  width: 480
-                  height: 480
-                  placeholder: BLURRED
-                  formats: [AUTO, WEBP, AVIF]
-                )
-              }
-            }
-          }
-        }
-        ... on GraphCMS_Place {
-          id
-          remoteTypeName
-          title
-          notes {
-            markdownNode {
-              childMdx {
-                body
-              }
-            }
-          }
-          coordinates {
-            latitude
-            longitude
-          }
-        }
-        ... on GraphCMS_Menu {
-          id
-          remoteTypeName
-          name
-          sections {
-            id
-            title
-            description {
-              markdownNode {
-                childMdx {
-                  body
-                }
-              }
-            }
-            entries {
-              id
-              name
-              prices {
-                notes
-                price
-                id
-              }
-              vegan
-            }
-            notes
-          }
-        }
-        ... on GraphCMS_Instagram {
-          id
-          remoteTypeName
-          title
-          description
-        }
-      }
+      ...PageTemplate
+    }
+    pageNeutral: graphCmsPage(
+      slug: { eq: $slug }
+      locale: { eq: it_IT }
+      stage: { eq: PUBLISHED }
+    ) {
+      ...PageTemplate
     }
   }
 `

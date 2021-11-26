@@ -38,7 +38,7 @@ fragment NavigationLink on NavigationLink {
       stage
     }
   }
-  navigationsEnd {
+  navigationsStart {
     ... on Navigation {
       remoteTypeName: __typename
       remoteId: id
@@ -46,7 +46,7 @@ fragment NavigationLink on NavigationLink {
       stage
     }
   }
-  navigations {
+  navigationsEnd {
     ... on Navigation {
       remoteTypeName: __typename
       remoteId: id

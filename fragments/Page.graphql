@@ -36,14 +36,6 @@ fragment Page on Page {
       stage
     }
   }
-  navigationsEnd {
-    ... on Navigation {
-      remoteTypeName: __typename
-      remoteId: id
-      locale
-      stage
-    }
-  }
   contents {
     ... on Content {
       remoteTypeName: __typename
@@ -70,7 +62,15 @@ fragment Page on Page {
       stage
     }
   }
-  navigations {
+  navigationsStart {
+    ... on Navigation {
+      remoteTypeName: __typename
+      remoteId: id
+      locale
+      stage
+    }
+  }
+  navigationsEnd {
     ... on Navigation {
       remoteTypeName: __typename
       remoteId: id
