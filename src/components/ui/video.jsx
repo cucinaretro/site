@@ -1,20 +1,23 @@
 import React from "react"
+import { YouTube, Vimeo } from "@pittica/gatsby-plugin-video"
 
 import "../../scss/components/ui/_video.scss"
 
-export default function Video({ id }) {
+function Switcher({ id, provider, url }) {
+  switch (provider) {
+    case "YouTube":
+      return <YouTube id={id} />
+    case "Vimeo":
+      return <Vimeo id={id} />
+    default:
+      return <a href={url}>{url}</a>
+  }
+}
+
+export default function Video({ id, provider, url }) {
   return (
     <div className="has-text-centered">
-      <iframe
-        className="video"
-        width="560"
-        height="315"
-        src={`https://www.youtube.com/embed/${id}`}
-        title="YouTube video player"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      />
+      <Switcher id={id} provider={provider} url={url} />
     </div>
   )
 }

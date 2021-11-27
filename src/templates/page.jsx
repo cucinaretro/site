@@ -81,6 +81,7 @@ export const pageQuery = graphql`
         videos: videoEmbeds {
           url
           id
+          provider
         }
         images {
           title

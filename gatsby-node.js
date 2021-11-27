@@ -2,6 +2,7 @@ require("dotenv").config()
 
 const path = require("path")
 const { formatLocale } = require("@pittica/gatsby-plugin-utils")
+const { getProvider } = require("@pittica/gatsby-plugin-video")
 
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
   const {
@@ -67,24 +68,7 @@ exports.createResolvers = ({ createResolvers }) => {
     GraphCMS_Content: {
       videoEmbeds: {
         type: "[Video!]!",
-        resolve: ({ videos }) => {
-          const results = []
-
-          videos.map((video) => {
-            const matches = video.match(
-              /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/
-            )
-
-            if (typeof matches[1] !== "undefined") {
-              results.push({
-                url: video,
-                id: matches[1],
-              })
-            }
-          })
-
-          return results
-        },
+        resolve: ({ videos }) => videos.map((url) => getProvider(url)),
       },
     },
   }
@@ -93,7 +77,7 @@ exports.createResolvers = ({ createResolvers }) => {
 }
 
 exports.createSchemaCustomization = ({ actions: { createTypes } }) => {
-  const typeDefs = `
+  createTypes(`
     type Locale {
       language: String!
       culture: String!
@@ -101,23 +85,8 @@ exports.createSchemaCustomization = ({ actions: { createTypes } }) => {
     }
     type Video {
       url: String!
-      id: String!
+      id: String
+      provider: String
     }
-  `
-  createTypes(typeDefs)
-}
-
-exports.onCreateWebpackConfig = ({ stage, actions, getConfig }) => {
-  if (stage === "build-javascript") {
-    const config = getConfig()
-    const miniCssExtractPlugin = config.plugins.find(
-      (plugin) => plugin.constructor.name === "MiniCssExtractPlugin"
-    )
-
-    if (miniCssExtractPlugin) {
-      miniCssExtractPlugin.options.ignoreOrder = true
-    }
-
-    actions.replaceWebpackConfig(config)
-  }
+  `)
 }
