@@ -22,14 +22,15 @@ export default function Page({
   },
   location,
 }) {
-  const { title, slug, description, contents, localeObject } = merge(
-    pageNeutral,
-    pageLocalized
-  )
+  const { title, description, contents } = merge(pageNeutral, pageLocalized)
 
   return (
     <div>
-      <Seo title={title} description={description} path={location.pathname} />
+      <Seo
+        title={title}
+        description={description}
+        path={location.pathname}
+      />
       {navigation && (
         <TopMenu
           title={navigation.title}
@@ -39,11 +40,11 @@ export default function Page({
           phone={phone}
         />
       )}
-      <LocalesMenu locale={localeObject} slug={slug} />
+      <LocalesMenu />
       <Main>
-        {contents.map((content) => {
-          return <Switcher key={content.id} content={content} />
-        })}
+        {contents.map((content) => (
+          <Switcher key={content.id} content={content} />
+        ))}
       </Main>
       <Footer />
     </div>
@@ -56,11 +57,6 @@ export const pageQuery = graphql`
     title
     locale
     description
-    localeObject {
-      language
-      culture
-      path
-    }
     contents {
       ... on GraphCMS_Content {
         id
@@ -69,6 +65,7 @@ export const pageQuery = graphql`
         title
         subtitle
         template
+        locale
         content {
           html
         }
@@ -96,6 +93,7 @@ export const pageQuery = graphql`
         remoteId
         remoteTypeName
         title
+        locale
         notes {
           markdownNode {
             childMdx {
@@ -112,6 +110,7 @@ export const pageQuery = graphql`
         id
         remoteId
         remoteTypeName
+        locale
         name
         sections {
           id
@@ -143,15 +142,13 @@ export const pageQuery = graphql`
         id
         remoteId
         remoteTypeName
+        locale
         title
         description
       }
     }
   }
-  query PageBySlug(
-    $slug: String!
-    $language: GraphCMS_Locale!
-  ) {
+  query PageBySlug($slug: String!, $language: GraphCMS_Locale!) {
     site {
       siteMetadata {
         organization {

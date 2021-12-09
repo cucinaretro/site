@@ -30,7 +30,11 @@ export default function Place({
         </div>
       </div>
       {typeof window !== "undefined" && (
-        <MapContainer center={[latitude, longitude]} zoom={13}>
+        <MapContainer
+          center={[latitude, longitude]}
+          zoom={12}
+          scrollWheelZoom={false}
+        >
           <TileLayer
             url="https://{s}.tile.osm.org/{z}/{x}/{y}.png"
             attribution='&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors'

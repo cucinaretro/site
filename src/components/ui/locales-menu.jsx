@@ -1,7 +1,8 @@
 import React from "react"
-import PropTypes from "prop-types"
 import { useI18next, Link } from "gatsby-plugin-react-i18next"
 import { formatLocale } from "@pittica/gatsby-plugin-utils"
+
+import "../../scss/components/ui/_locales-menu.scss"
 
 export default function LocalesMenu() {
   const { languages, language, originalPath, t } = useI18next()
@@ -32,9 +33,4 @@ export default function LocalesMenu() {
   } else {
     return null
   }
-}
-
-LocalesMenu.propTypes = {
-  locale: PropTypes.object,
-  slug: PropTypes.string.isRequired,
 }

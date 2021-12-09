@@ -13,33 +13,24 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
         nodes {
           slug
           updatedAt
-          locale
-          localeObject {
-            language
-            culture
-            path
-          }
+          language: locale
           remotePath
         }
       }
     }
   `)
 
-  pages.nodes.forEach(
-    ({ slug, updatedAt, locale, localeObject, remotePath }) => {
-      createPage({
-        path: remotePath,
-        component: path.resolve(`./src/templates/page.jsx`),
-        context: {
-          slug,
-          updatedAt,
-          locale,
-          language: locale,
-          localeObject,
-        },
-      })
-    }
-  )
+  pages.nodes.forEach(({ slug, updatedAt, language, remotePath }) => {
+    createPage({
+      path: remotePath,
+      component: path.resolve(`./src/templates/page.jsx`),
+      context: {
+        slug,
+        updatedAt,
+        language,
+      },
+    })
+  })
 }
 
 exports.createResolvers = ({ createResolvers }) => {
@@ -53,10 +44,6 @@ exports.createResolvers = ({ createResolvers }) => {
 
   const resolvers = {
     GraphCMS_Page: {
-      localeObject: {
-        type: "LocaleData",
-        resolve: ({ locale }) => lc(locale),
-      },
       remotePath: {
         type: "String",
         resolve: ({ locale, slug }) => {
@@ -79,11 +66,6 @@ exports.createResolvers = ({ createResolvers }) => {
 
 exports.createSchemaCustomization = ({ actions: { createTypes } }) => {
   createTypes(`
-    type LocaleData {
-      language: String!
-      culture: String
-      path: String!
-    }
     type Locale implements Node {
       language: GraphCMS_Locale
     }
