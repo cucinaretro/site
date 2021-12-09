@@ -1,5 +1,8 @@
 require("dotenv").config()
 
+const siteUrl = `https://${process.env.HOST}`
+const locales = ["it", "en"]
+
 module.exports = {
   siteMetadata: {
     title: process.env.NAME,
@@ -9,12 +12,12 @@ module.exports = {
       language: process.env.LOCALE.toLowerCase(),
       culture: process.env.CULTURE.toUpperCase(),
     },
-    siteUrl: `https://${process.env.HOST}`,
+    siteUrl,
     organization: {
       company: process.env.OWNER_COMPANY,
       address: process.env.OWNER_ADDRESS,
-      url: `https://${process.env.HOST}`,
-      logo: `https://${process.env.HOST}/logo.png`,
+      url: siteUrl,
+      logo: `${siteUrl}/logo.png`,
       zipCode: process.env.OWNER_ZIP_CODE,
       city: process.env.OWNER_CITY,
       province: process.env.OWNER_PROVINCE,
@@ -38,6 +41,35 @@ module.exports = {
       options: {
         extensions: [`.md`, `.mdx`],
         mediaTypes: [`text/markdown`, `text/x-markdown`],
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/locales`,
+        name: `locale`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-react-i18next`,
+      options: {
+        localeJsonSourceName: `locale`,
+        languages: locales,
+        defaultLanguage: process.env.LOCALE.toLowerCase(),
+        fallbackLanguage: process.env.LOCALE.toLowerCase(),
+        siteUrl,
+        i18nextOptions: {
+          defaultNS: 'messages',
+          nonExplicitSupportedLngs: true,
+          cleanCode: true,
+        },
+        pages: [
+          {
+            matchPath: "/:lang?/:slug",
+            getLanguageFromPath: true,
+            excludeLanguages: [process.env.LOCALE.toLowerCase()],
+          },
+        ],
       },
     },
     {
@@ -70,7 +102,7 @@ module.exports = {
         endpoint: process.env.GRAPHCMS_ENDPOINT,
         token: process.env.GRAPHCMS_TOKEN,
         buildMarkdownNodes: true,
-        locales: ["en_US", "it_IT"],
+        locales,
         fragmentsPath: "fragments",
         downloadLocalImages: true,
         stages: ["PUBLISHED"],

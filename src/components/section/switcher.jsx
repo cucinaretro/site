@@ -5,12 +5,12 @@ import Place from "./place"
 import Content from "./content"
 import Instagram from "./instagram"
 
-export default function Switcher({ content, neutral }) {
+export default function Switcher({ content }) {
   switch (content.remoteTypeName) {
     case "Content":
       return <Content content={content} />
     case "Menu":
-      return <Menu content={content} neutral={neutral} />
+      return <Menu content={content} />
     case "Place":
       return <Place content={content} />
     case "Instagram":

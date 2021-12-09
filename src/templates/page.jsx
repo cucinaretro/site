@@ -1,11 +1,13 @@
 import React from "react"
 import { graphql } from "gatsby"
 import { Seo } from "@pittica/gatsby-plugin-seo"
+import merge from "lodash.merge"
 
 import Footer from "../components/ui/footer"
 import Main from "../components/ui/main"
 import Switcher from "../components/section/switcher"
 import TopMenu from "../components/ui/top-menu"
+import LocalesMenu from "../components/ui/locales-menu"
 
 export default function Page({
   data: {
@@ -15,41 +17,32 @@ export default function Page({
       },
     },
     navigation,
-    page: { title, description, contents, localeObject },
+    pageLocalized,
     pageNeutral,
   },
   location,
 }) {
+  const { title, slug, description, contents, localeObject } = merge(
+    pageNeutral,
+    pageLocalized
+  )
+
   return (
     <div>
-      <Seo
-        title={title || pageNeutral.title}
-        description={description || pageNeutral.description}
-        path={location.pathname}
-      />
+      <Seo title={title} description={description} path={location.pathname} />
       {navigation && (
         <TopMenu
           title={navigation.title}
           start={navigation.start}
           end={navigation.end}
           location={location}
-          locale={localeObject}
           phone={phone}
         />
       )}
+      <LocalesMenu locale={localeObject} slug={slug} />
       <Main>
-        {pageNeutral.contents.map((element) => {
-          let result = element
-
-          contents.forEach((content) => {
-            if (content.remoteId === element.remoteId) {
-              result = content
-
-              return true
-            }
-          })
-
-          return <Switcher key={result.id} content={result} neutral={element} />
+        {contents.map((content) => {
+          return <Switcher key={content.id} content={content} />
         })}
       </Main>
       <Footer />
@@ -59,6 +52,7 @@ export default function Page({
 
 export const pageQuery = graphql`
   fragment PageTemplate on GraphCMS_Page {
+    slug
     title
     locale
     description
@@ -154,7 +148,10 @@ export const pageQuery = graphql`
       }
     }
   }
-  query PageBySlug($slug: String!, $locale: GraphCMS_Locale!) {
+  query PageBySlug(
+    $slug: String!
+    $language: GraphCMS_Locale!
+  ) {
     site {
       siteMetadata {
         organization {
@@ -162,10 +159,19 @@ export const pageQuery = graphql`
         }
       }
     }
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
     navigation: graphCmsNavigation(
       slug: { eq: "top" }
       stage: { eq: PUBLISHED }
-      locale: { eq: $locale }
+      locale: { eq: $language }
     ) {
       title
       start {
@@ -203,16 +209,16 @@ export const pageQuery = graphql`
         }
       }
     }
-    page: graphCmsPage(
+    pageLocalized: graphCmsPage(
       slug: { eq: $slug }
-      locale: { eq: $locale }
+      locale: { eq: $language }
       stage: { eq: PUBLISHED }
     ) {
       ...PageTemplate
     }
     pageNeutral: graphCmsPage(
       slug: { eq: $slug }
-      locale: { eq: it_IT }
+      locale: { eq: it }
       stage: { eq: PUBLISHED }
     ) {
       ...PageTemplate

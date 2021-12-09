@@ -34,6 +34,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
           slug,
           updatedAt,
           locale,
+          language: locale,
           localeObject,
         },
       })
@@ -53,7 +54,7 @@ exports.createResolvers = ({ createResolvers }) => {
   const resolvers = {
     GraphCMS_Page: {
       localeObject: {
-        type: "Locale",
+        type: "LocaleData",
         resolve: ({ locale }) => lc(locale),
       },
       remotePath: {
@@ -78,10 +79,13 @@ exports.createResolvers = ({ createResolvers }) => {
 
 exports.createSchemaCustomization = ({ actions: { createTypes } }) => {
   createTypes(`
-    type Locale {
+    type LocaleData {
       language: String!
-      culture: String!
+      culture: String
       path: String!
+    }
+    type Locale implements Node {
+      language: GraphCMS_Locale
     }
     type Video {
       url: String!
