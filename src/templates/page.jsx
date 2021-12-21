@@ -7,7 +7,6 @@ import Footer from "../components/ui/footer"
 import Main from "../components/ui/main"
 import Switcher from "../components/section/switcher"
 import TopMenu from "../components/ui/top-menu"
-import LocalesMenu from "../components/ui/locales-menu"
 
 export default function Page({
   data: {
@@ -26,11 +25,7 @@ export default function Page({
 
   return (
     <div>
-      <Seo
-        title={title}
-        description={description}
-        path={location.pathname}
-      />
+      <Seo title={title} description={description} path={location.pathname} />
       {navigation && (
         <TopMenu
           title={navigation.title}
@@ -40,7 +35,6 @@ export default function Page({
           phone={phone}
         />
       )}
-      <LocalesMenu />
       <Main>
         {contents.map((content) => (
           <Switcher key={content.id} content={content} />
