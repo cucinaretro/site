@@ -2,13 +2,14 @@ import React from "react"
 import PropTypes from "prop-types"
 import classNames from "classnames"
 import { Navbar } from "@pittica/gatsby-plugin-navigation"
-import { useI18next } from "gatsby-plugin-react-i18next"
+import { useI18next, Link } from "gatsby-plugin-react-i18next"
+import { formatLocale } from "@pittica/gatsby-plugin-utils"
 
 import logo from "../../images/logo.svg"
 
 import "../../scss/components/ui/_top-menu.scss"
 
-function getItems(links, path) {
+function getItems(links) {
   if (links) {
     return links.map((link) => {
       switch (link.remoteTypeName) {
@@ -35,9 +36,31 @@ function getItems(links, path) {
 }
 
 export default function TopMenu({ location, title, start, end, phone }) {
+  const { t, defaultLanguage, language, languages, originalPath } = useI18next()
   const phoneUri = `tel:${phone.replaceAll(" ", "-")}`
-  const { t, defaultLanguage, language } = useI18next()
   const endItems = getItems(end)
+
+  languages.forEach((lng, i) => {
+    if (lng !== language) {
+      const lc = formatLocale(lng)
+
+      endItems.push(
+        <Link
+          to={originalPath}
+          language={lng}
+          key={`locales-${i}`}
+          className="navbar-item"
+        >
+          <span className="icon-text">
+            <span className="icon">
+              <i className={`icon-cucinaretro-${lng}`} title={t(lc.language)} />{" "}
+            </span>
+            <span>{t(lc.language)}</span>
+          </span>
+        </Link>
+      )
+    }
+  })
 
   endItems.push({
     link: phoneUri,
@@ -60,7 +83,7 @@ export default function TopMenu({ location, title, start, end, phone }) {
     >
       <a href={phoneUri} className="call-direct">
         <span className="icon">
-          <i className="icon-cucinaretro-phone"></i>
+          <i className="icon-cucinaretro-phone" />
         </span>
       </a>
     </Navbar>

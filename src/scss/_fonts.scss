@@ -1,26 +1,28 @@
 @import "@pittica/scss-functions";
 
-@import url('https://fonts.googleapis.com/css2?family=Mouse+Memoirs&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Mouse+Memoirs&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&display=swap");
 
 @include font(cucinaretro);
 @include icon-family(cucinaretro);
 
+@include icon(cucinaretro, en, "\e903");
+@include icon(cucinaretro, it, "\e904");
 @include icon(cucinaretro, ornament-title, "\e900");
-@include icon(cucinaretro, devider-secondary, "\e901");
-@include icon(cucinaretro, devider-primary, "\e902");
-@include icon(cucinaretro, whatsapp, "\e90d");
-@include icon(cucinaretro, vegetarian, "\e904");
+@include icon(cucinaretro, ornament-secondary, "\e901");
+@include icon(cucinaretro, ornament-primary, "\e902");
 @include icon(cucinaretro, down, "\2b9f");
 @include icon(cucinaretro, left, "\2b9c");
 @include icon(cucinaretro, up, "\2b9d");
 @include icon(cucinaretro, right, "\2b9e");
 @include icon(cucinaretro, email, "\1f4e7");
 @include icon(cucinaretro, phone, "\1f57e");
+@include icon(cucinaretro, whatsapp, "\e90d");
 @include icon(cucinaretro, instagram, "\e906");
 @include icon(cucinaretro, facebook, "\e907");
 @include icon(cucinaretro, signal, "\1f4e1");
 @include icon(cucinaretro, images, "\e909");
 @include icon(cucinaretro, download, "\e90a");
 @include icon(cucinaretro, shop, "\1f3ec");
-@include icon(cucinaretro, pin, "\1f4cd");
+@include icon(cucinaretro, location-pin, "\1f4cd");
+@include icon(cucinaretro, vegetarian, "\1f331");

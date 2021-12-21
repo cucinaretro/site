@@ -2,9 +2,9 @@ import React from "react"
 import classNames from "classnames"
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 import { Icon, Point } from "leaflet"
+import { MarkdownRenderer } from "@pittica/gatsby-plugin-mdx-shortcodes"
 
 import Section from "../ui/section"
-import Renderer from "../../mdx/renderer"
 
 import marker from "../../images/map/marker.svg"
 
@@ -25,7 +25,7 @@ export default function Place({
         </div>
         <div className={classNames("column", "is-half", "content")}>
           <Section>
-            <Renderer>{notes}</Renderer>
+            <MarkdownRenderer>{notes}</MarkdownRenderer>
           </Section>
         </div>
       </div>
@@ -56,7 +56,7 @@ export default function Place({
                 href={`https://maps.google.com/?q=${latitude},${longitude}`}
                 target="_new"
               >
-                <Renderer>{notes}</Renderer>
+                <MarkdownRenderer>{notes}</MarkdownRenderer>
               </a>
             </Popup>
           </Marker>
