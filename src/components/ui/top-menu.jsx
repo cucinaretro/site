@@ -55,7 +55,7 @@ export default function TopMenu({ location, title, start, end, phone }) {
             <span className="icon">
               <i className={`icon-cucinaretro-${lng}`} title={t(lc.language)} />{" "}
             </span>
-            <span>{t(lc.language)}</span>
+            <span>{t(`${lc.language}_original`)}</span>
           </span>
         </Link>
       )

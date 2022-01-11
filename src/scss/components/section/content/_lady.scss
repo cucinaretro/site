@@ -1,8 +1,23 @@
 @import "../../../variables";
 
+@import "~bulma/sass/utilities/mixins";
+
 .lady {
   background: $white url("../../../../images/section/lady-bg.png") repeat-x center center;
   background-attachment: fixed;
+  .gatsby-image-wrapper {
+    @include until($tablet) {
+      max-height: 50vh;
+      width: auto;
+      text-align: center;
+    }
+    img {
+      @include until($tablet) {
+        max-height: 50vh;
+        width: auto;
+      }
+    }
+  }
   .graphic {
     padding: $size-2;
   }
@@ -14,11 +29,17 @@
       font-size: $size-1;
       text-transform: uppercase;
       letter-spacing: $size-7;
+      @include until($desktop) {
+        font-size: $size-2;
+      }
     }
     .subtitle {
       font-family: $family-secondary;
       font-size: $size-2;
       letter-spacing: $size-7;
+      @include until($desktop) {
+        font-size: $size-3;
+      }
     }
     .divider {
       text-align: center;
