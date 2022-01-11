@@ -14,7 +14,7 @@ export default function Cook({
     <div className={classNames("container", "child")}>
       {title && <h2 className="title">{title}</h2>}
       {subtitle && <h3 className="subtitle">{subtitle}</h3>}
-      <div className={classNames("columns", "is-vcentered")}>
+      <div className={classNames("columns", "is-vcentered", "is-multiline")}>
         <div className={classNames("column", "is-two-thirds", "content")}>
           {content && (
             <div
@@ -22,14 +22,18 @@ export default function Cook({
               dangerouslySetInnerHTML={{ __html: content.html }}
             />
           )}
-          <ImageSlider items={images} />
-          <VideoSlider items={videos} />
         </div>
-        <div className={classNames("column", "is-one-third", "has-text-centered")}>
+        <div
+          className={classNames("column", "is-one-third", "has-text-centered")}
+        >
           <StaticImage
             src="../../../images/section/child.png"
             alt="Cucina Retrò"
           />
+        </div>
+        <div className={classNames("column", "is-full")}>
+          <ImageSlider items={images} />
+          <VideoSlider items={videos} />
         </div>
       </div>
     </div>

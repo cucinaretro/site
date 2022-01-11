@@ -9,5 +9,5 @@ export function wrapRootElement({ element }) {
 }
 
 export function onServiceWorkerUpdateReady() {
-  window.location.reload()
+  window.location.reload(true)
 }
