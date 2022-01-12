@@ -1,14 +1,11 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { Seo } from "@pittica/gatsby-plugin-seo"
 import merge from "lodash.merge"
 
-import Footer from "../components/ui/footer"
-import Main from "../components/ui/main"
 import Switcher from "../components/section/switcher"
-import TopMenu from "../components/ui/top-menu"
+import Page from "../components/layout/page"
 
-export default function Page({
+export default function PageTemplate({
   data: {
     site: {
       siteMetadata: {
@@ -24,24 +21,18 @@ export default function Page({
   const { title, description, contents } = merge(pageNeutral, pageLocalized)
 
   return (
-    <div>
-      <Seo title={title} description={description} path={location.pathname} />
-      {navigation && (
-        <TopMenu
-          title={navigation.title}
-          start={navigation.start}
-          end={navigation.end}
-          location={location}
-          phone={phone}
-        />
-      )}
-      <Main>
-        {contents.map((content) => (
-          <Switcher key={content.id} content={content} />
-        ))}
-      </Main>
-      <Footer />
-    </div>
+    <Page
+      title={title}
+      description={description}
+      location={location}
+      navigationStart={navigation.start}
+      navigationEnd={navigation.end}
+      phone={phone}
+    >
+      {contents.map((content) => (
+        <Switcher key={content.id} content={content} />
+      ))}
+    </Page>
   )
 }
 

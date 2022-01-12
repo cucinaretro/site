@@ -1,11 +1,14 @@
 import React from "react"
+import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 
 import Hero from "../components/ui/hero"
 import Page from "../components/layout/page"
 
-export default function NotFoundPage({
+export default function Error({
   location,
+  title,
+  description,
   data: {
     site: {
       siteMetadata: {
@@ -17,20 +20,20 @@ export default function NotFoundPage({
 }) {
   return (
     <Page
-      title="404"
-      description="Not Found"
+      title={title}
+      description={description}
       location={location}
       navigationStart={navigation.start}
       navigationEnd={navigation.end}
       phone={phone}
     >
-      <Hero title="404" subtitle="Not Found" />
+      <Hero title={title} subtitle={description} />
     </Page>
   )
 }
 
 export const pageQuery = graphql`
-  query Page404($language: GraphCMS_Locale!) {
+  query PageError($language: GraphCMS_Locale!) {
     site {
       siteMetadata {
         organization {
@@ -90,3 +93,17 @@ export const pageQuery = graphql`
     }
   }
 `
+
+Error.propTypes = {
+  children: PropTypes.any,
+  location: PropTypes.object,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  data: PropTypes.object,
+}
+
+Error.defaultProps = {
+  title: "500",
+  description: "Error",
+  data: {},
+}
