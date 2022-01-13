@@ -53,7 +53,7 @@ export default function TopMenu({ location, title, start, end, phone }) {
         >
           <span className="icon-text">
             <span className="icon">
-              <i className={`icon-cucinaretro-${lng}`} title={t(lc.language)} />{" "}
+              <i className={`icon-cucinaretro-${lng}`} title={t(lc.language)} />
             </span>
             <span>{t(`${lc.language}_original`)}</span>
           </span>
@@ -62,11 +62,21 @@ export default function TopMenu({ location, title, start, end, phone }) {
     }
   })
 
+  const onClick = () => {
+    if (typeof window.gtag !== "undefined") {
+      window.gtag("event", "click", {
+        event_label: "telephone",
+        event_category: "engagement",
+      })
+    }
+  }
+
   endItems.push({
     link: phoneUri,
     label: t("Call"),
     className: classNames("is-sticky", "is-hidden-mobile"),
     icon: "icon-cucinaretro-phone",
+    onClick,
   })
 
   return (
@@ -81,7 +91,7 @@ export default function TopMenu({ location, title, start, end, phone }) {
       logoWidth={380}
       logoHeight={172}
     >
-      <a href={phoneUri} className="call-direct">
+      <a href={phoneUri} className="call-direct" onClick={onClick}>
         <span className="icon">
           <i className="icon-cucinaretro-phone" />
         </span>

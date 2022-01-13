@@ -12,7 +12,7 @@
     "@mdx-js/react": "^1.6.22",
     "@pittica/gatsby-plugin-cookiehub": "^2.1.0",
     "@pittica/gatsby-plugin-mdx-shortcodes": "^1.2.0",
-    "@pittica/gatsby-plugin-navigation": "3.0.3",
+    "@pittica/gatsby-plugin-navigation": "3.1.0",
     "@pittica/gatsby-plugin-seo": "^3.0.8",
     "@pittica/gatsby-plugin-utils": "^2.1.0",
     "@pittica/gatsby-plugin-video": "1.1.0",
