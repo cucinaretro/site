@@ -2,12 +2,14 @@ import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import classNames from "classnames"
 import { SocialFollow } from "@pittica/gatsby-plugin-seo"
+import { useI18next } from "gatsby-plugin-react-i18next"
 
 import logo from "../../images/logo.svg"
 
 import "../../scss/components/ui/_footer.scss"
 
 export default function Footer() {
+  const { t } = useI18next()
   const {
     site: {
       siteMetadata: { title, organization },
@@ -67,13 +69,12 @@ export default function Footer() {
             </div>
             {organization.taxId && (
               <div>
-                Codice Fiscale{" "}
-                <span itemProp="taxID">{organization.taxId}</span>
+                {t("Tax ID")} <span itemProp="taxID">{organization.taxId}</span>
               </div>
             )}
             {organization.vatId && (
               <div>
-                Partita IVA <span itemProp="vatID">{organization.vatId}</span>
+                {t("VAT ID")} <span itemProp="vatID">{organization.vatId}</span>
               </div>
             )}
             {organization.registryId && (
@@ -96,6 +97,15 @@ export default function Footer() {
                 </span>
               </div>
             )}
+            <div>
+              <a
+                href="https://www.iubenda.com/privacy-policy/13725670/legal"
+                target="_new"
+                tilte={t("Privacy Policy")}
+              >
+                {t("Privacy Policy")}
+              </a>
+            </div>
           </div>
           <div className={classNames("column", "one-quarter")}>
             <SocialFollow />

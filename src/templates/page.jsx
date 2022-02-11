@@ -80,11 +80,7 @@ export const pageQuery = graphql`
         title
         locale
         notes {
-          markdownNode {
-            childMdx {
-              body
-            }
-          }
+          html
         }
         coordinates {
           latitude
@@ -102,11 +98,7 @@ export const pageQuery = graphql`
           remoteId
           title
           description {
-            markdownNode {
-              childMdx {
-                body
-              }
-            }
+            html
           }
           entries {
             id

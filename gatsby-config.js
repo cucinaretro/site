@@ -37,13 +37,6 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: `gatsby-plugin-mdx`,
-      options: {
-        extensions: [`.md`, `.mdx`],
-        mediaTypes: [`text/markdown`, `text/x-markdown`],
-      },
-    },
-    {
       resolve: `gatsby-source-filesystem`,
       options: {
         path: `${__dirname}/locales`,
@@ -59,7 +52,7 @@ module.exports = {
         fallbackLanguage: process.env.LOCALE.toLowerCase(),
         siteUrl,
         i18nextOptions: {
-          defaultNS: 'messages',
+          defaultNS: "messages",
           nonExplicitSupportedLngs: true,
           cleanCode: true,
         },
@@ -101,10 +94,8 @@ module.exports = {
       options: {
         endpoint: process.env.GRAPHCMS_ENDPOINT,
         token: process.env.GRAPHCMS_TOKEN,
-        buildMarkdownNodes: true,
         locales,
         fragmentsPath: "fragments",
-        downloadLocalImages: true,
         stages: ["PUBLISHED"],
       },
     },
@@ -125,7 +116,11 @@ module.exports = {
       options: {
         code: process.env.COOKIEHUB_CODE,
         debug: (process.env.ENV || process.env.NODE_ENV) !== "production",
-        cookie: "cucinaretro-gdpr",
+        cookie: "cucinaretro-gdpr-analytics",
+      },
+      facebookPixel: {
+        pixelId: process.env.FACEBOOK_PIXEL,
+        cookieName: "cucinaretro-gdpr-marketing",
       },
     },
     `gatsby-plugin-sass`,
@@ -147,28 +142,17 @@ module.exports = {
         output: "/./",
         query: `
           {
-            site {
-              siteMetadata {
-                siteUrl
-              }
-            }
             allSitePage {
               nodes {
                 path
-                context {
-                  updatedAt
-                }
+                pageContext
               }
             }
           }
         `,
-        resolvePages: ({
-          site: {
-            siteMetadata: { siteUrl },
-          },
-          allSitePage: { nodes },
-        }) =>
-          nodes.map(({ path, context }) => {
+        resolveSiteUrl: () => siteUrl,
+        resolvePages: ({ allSitePage: { nodes } }) =>
+          nodes.map(({ path, pageContext }) => {
             const page = {
               path: new URL(path, siteUrl).href,
               changefreq: "daily",
@@ -176,13 +160,11 @@ module.exports = {
               lastmod: null,
             }
 
-            if (context && context) {
-              if (context.updatedAt) {
-                page.lastmod = context.updatedAt
-              }
-
-              page.priority = path === "/" ? 1.0 : 0.5
+            if (pageContext && pageContext.updatedAt) {
+              page.lastmod = pageContext.updatedAt
             }
+
+            page.priority = path === "/" ? 1.0 : 0.5
 
             return page
           }),

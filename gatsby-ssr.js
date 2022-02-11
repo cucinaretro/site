@@ -1,5 +1,3 @@
-export { wrapRootElement } from './gatsby-browser';
-
 export const onRenderBody = ({ setHtmlAttributes }) => {
   setHtmlAttributes({
     itemScope: true,

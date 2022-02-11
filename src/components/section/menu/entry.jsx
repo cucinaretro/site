@@ -1,6 +1,5 @@
 import React from "react"
 import classNames from "classnames"
-import { MarkdownRenderer } from "@pittica/gatsby-plugin-mdx-shortcodes"
 
 import "../../../scss/components/section/menu/_entry.scss"
 
@@ -27,9 +26,11 @@ export default function Entry({ entry: { name, description, vegan, prices } }) {
             )}
           </h6>
           {description && (
-            <div itemProp="description" className="description">
-              <MarkdownRenderer>{description}</MarkdownRenderer>
-            </div>
+            <div
+              itemProp="description"
+              className="description"
+              dangerouslySetInnerHTML={{ __html: description.html }}
+            />
           )}
         </div>
         <div

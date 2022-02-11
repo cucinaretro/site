@@ -1,7 +1,8 @@
 require("dotenv").config()
 
 const path = require("path")
-const { formatLocale } = require("@pittica/gatsby-plugin-utils")
+const { createRemoteFileNode } = require("gatsby-source-filesystem")
+const { formatLocale, fileCategory } = require("@pittica/gatsby-plugin-utils")
 const { getProvider } = require("@pittica/gatsby-plugin-video")
 
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
@@ -74,5 +75,47 @@ exports.createSchemaCustomization = ({ actions: { createTypes } }) => {
       id: String
       provider: String
     }
+    type GraphCMS_Asset implements Node {
+      localFile: File @link(from: "fields.localFile")
+      category: String
+    }
   `)
+}
+
+exports.onCreateNode = async ({
+  node,
+  actions: { createNode, createNodeField },
+  createNodeId,
+  getCache,
+  cache,
+}) => {
+  switch (node.remoteTypeName) {
+    case "Asset":
+      try {
+        const ext = path.extname(node.fileName)
+        const fileNode = await createRemoteFileNode({
+          url: node.url,
+          parentNodeId: node.id,
+          createNode,
+          createNodeId,
+          cache,
+          getCache,
+          name: path.basename(node.fileName, ext),
+          ext,
+        })
+
+        if (fileNode) {
+          createNodeField({ node, name: "localFile", value: fileNode.id })
+          createNodeField({
+            node,
+            name: "category",
+            value: fileCategory(fileNode.ext),
+          })
+        }
+      } catch (e) {
+        console.error("GraphCMS", e)
+      }
+
+      return
+  }
 }

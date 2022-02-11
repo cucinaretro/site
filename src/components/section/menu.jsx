@@ -1,5 +1,4 @@
 import React from "react"
-import { MarkdownRenderer } from "@pittica/gatsby-plugin-mdx-shortcodes"
 
 import Hero from "../ui/hero"
 import Section from "../ui/section"
@@ -25,7 +24,9 @@ export default function Menu({ content: { name, sections } }) {
           itemType="https://schema.org/MenuSection"
         >
           {section.description && (
-            <MarkdownRenderer>{section.description}</MarkdownRenderer>
+            <div
+              dangerouslySetInnerHTML={{ __html: section.description.html }}
+            />
           )}
           {section.entries.map((entry) => (
             <Entry key={entry.id} entry={entry} />
