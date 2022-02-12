@@ -2,7 +2,7 @@ require("dotenv").config()
 
 const path = require("path")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
-const { formatLocale, fileCategory } = require("@pittica/gatsby-plugin-utils")
+const { formatLocale } = require("@pittica/gatsby-plugin-utils")
 const { getProvider } = require("@pittica/gatsby-plugin-video")
 
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
@@ -21,7 +21,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     }
   `)
 
-  pages.nodes.forEach(({ slug, updatedAt, language, remotePath }) => {
+  pages.nodes.forEach(({ slug, updatedAt, language, remotePath }) =>
     createPage({
       path: remotePath,
       component: path.resolve(`./src/templates/page.jsx`),
@@ -31,7 +31,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
         language,
       },
     })
-  })
+  )
 }
 
 exports.createResolvers = ({ createResolvers }) => {
@@ -106,11 +106,6 @@ exports.onCreateNode = async ({
 
         if (fileNode) {
           createNodeField({ node, name: "localFile", value: fileNode.id })
-          createNodeField({
-            node,
-            name: "category",
-            value: fileCategory(fileNode.ext),
-          })
         }
       } catch (e) {
         console.error("GraphCMS", e)

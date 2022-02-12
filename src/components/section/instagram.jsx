@@ -11,7 +11,7 @@ export default function Instagram({ content: { title, description } }) {
     instagram: { items },
   } = useStaticQuery(graphql`
     query Instagram {
-      instagram: allInstagram {
+      instagram: allInstagramPost {
         items: nodes {
           id
           caption

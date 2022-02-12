@@ -208,6 +208,7 @@ module.exports = {
         token: process.env.INSTAGRAM_TOKEN,
         limit: 9,
         locale: process.env.LOCALE.toLowerCase(),
+        type: "InstagramPost"
       },
     },
     {
