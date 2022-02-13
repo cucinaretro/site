@@ -104,6 +104,9 @@ export const pageQuery = graphql`
             id
             remoteId
             name
+            description {
+              html
+            }
             prices {
               id
               remoteId
