@@ -4,6 +4,8 @@ const path = require("path")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
 const { formatLocale } = require("@pittica/gatsby-plugin-utils")
 const { getProvider } = require("@pittica/gatsby-plugin-video")
+const { refreshAccessToken } = require("@pittica/gatsby-source-instagram")
+const axios = require("axios")
 
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
   const {
@@ -32,6 +34,47 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       },
     })
   )
+}
+
+exports.onPreInit = async ({ reporter }) => {
+  const config = {
+    headers: {
+      "User-Agent": `${process.env.HOST} (${process.env.OWNER_EMAIL})`,
+      Authorization: `Bearer ${process.env.NETLIFY_TOKEN}`,
+    },
+  }
+  const endpoint = `https://api.netlify.com/api/v1/sites/${process.env.NETLIFY_SITE_ID}`
+
+  const payload = await axios
+    .get(endpoint, config)
+    .then(async ({ data: { build_settings } }) => {
+      if (typeof build_settings.env !== "undefined") {
+        build_settings.env.INSTAGRAM_TOKEN = await refreshAccessToken(
+          process.env.INSTAGRAM_TOKEN
+        )
+
+        return build_settings
+      } else {
+        reporter.warn({
+          context: {
+            sourceMessage: `Netlify connection failed.`,
+          },
+        })
+
+        return null
+      }
+    })
+    .catch(() => {
+      reporter.warn({
+        context: {
+          sourceMessage: `Netlify connection failed.`,
+        },
+      })
+    })
+
+  if (payload !== null) {
+    await axios.patch(endpoint, { build_settings: payload }, config)
+  }
 }
 
 exports.createResolvers = ({ createResolvers }) => {
