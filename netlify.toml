@@ -8,15 +8,16 @@ package = "@netlify/plugin-gatsby"
 [[headers]]
   for = "**/page-data/*"
   [headers.values]
-  cache-control = '''
-  max-age=0,
-  no-cache,
-  no-store,
-  must-revalidate'''
+    cache-control = '''
+    max-age=0,
+    no-cache,
+    no-store,
+    must-revalidate'''
+
   for = "**/sw.js"
   [headers.values]
-  cache-control = '''
-  max-age=0,
-  no-cache,
-  no-store,
-  must-revalidate'''
+    cache-control = '''
+    max-age=0,
+    no-cache,
+    no-store,
+    must-revalidate'''
