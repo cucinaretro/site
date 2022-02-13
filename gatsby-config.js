@@ -69,20 +69,14 @@ module.exports = {
       resolve: `gatsby-plugin-netlify`,
       options: {
         headers: {
-          "/public/**/*.html": [
-            "Cache-Control: public, max-age=0, must-revalidate",
+          "/*.html": ["Cache-Control: public, max-age=0, must-revalidate"],
+          "/sw.js": [
+            "Cache-Control: public, max-age=0, no-cache, no-store, must-revalidate, must-revalidate",
           ],
-          "/sw.js": ["Cache-Control: public, max-age=0, must-revalidate"],
-          "/public/page-data/*": [
-            "Cache-Control: public, max-age=0, must-revalidate",
+          "/page-data/*": [
+            "Cache-Control: public, max-age=0, no-cache, no-store, must-revalidate, must-revalidate",
           ],
-          "**/*.@(eot|otf|ttf|ttc|woff|woff2|font.css)": [
-            "Access-Control-Allow-Origin: *",
-          ],
-          "**/page-data/*": [
-            "Cache-Control: public, max-age=0, must-revalidate",
-          ],
-          "error/*": ["Cache-Control: max-age=300"],
+          "/error/*": ["Cache-Control: max-age=300"],
         },
       },
     },
@@ -208,7 +202,7 @@ module.exports = {
         token: process.env.INSTAGRAM_TOKEN,
         limit: 9,
         locale: process.env.LOCALE.toLowerCase(),
-        type: "InstagramPost"
+        type: "InstagramPost",
       },
     },
     {
