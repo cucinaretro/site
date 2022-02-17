@@ -114,11 +114,7 @@ module.exports = {
       options: {
         code: process.env.COOKIEHUB_CODE,
         debug: (process.env.ENV || process.env.NODE_ENV) !== "production",
-        cookie: "cucinaretro-gdpr-analytics",
-      },
-      facebookPixel: {
-        pixelId: process.env.FACEBOOK_PIXEL,
-        cookieName: "cucinaretro-gdpr-marketing",
+        cookie: "cucinaretro-gdpr",
       },
     },
     `gatsby-plugin-sass`,
