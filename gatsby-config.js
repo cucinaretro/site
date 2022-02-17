@@ -102,6 +102,10 @@ module.exports = {
           anonymize: true,
           allowAdFeatures: false,
         },
+        facebookPixel: {
+          pixelId: process.env.FACEBOOK_PIXEL,
+          cookieName: "cucinaretro-gdpr-marketing",
+        },
         environments: ["production", "development"],
       },
     },
