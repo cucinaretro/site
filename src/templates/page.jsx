@@ -1,10 +1,9 @@
 import React from "react"
 import { graphql } from "gatsby"
-import { useI18next } from "gatsby-plugin-react-i18next"
 
 import Switcher from "../components/section/switcher"
 import Page from "../components/layout/page"
-import Hero from "../components/ui/hero"
+import Notes from "../components/ui/notes"
 
 export default function PageTemplate({
   data: {
@@ -20,8 +19,6 @@ export default function PageTemplate({
   },
   location,
 }) {
-  const { t } = useI18next()
-
   return (
     <Page
       title={title}
@@ -34,28 +31,10 @@ export default function PageTemplate({
       {contents.map((content) => (
         <Switcher key={content.id} content={content} />
       ))}
-      {(vegan || notInFullBoard) && (
-        <Hero title={t("Notes")}>
-          {vegan && (
-            <div className="icon-text">
-              <span className="icon">
-                <i className="icon-cucinaretro-vegetarian" />
-              </span>
-              <span>{t("Vegan")}</span>
-            </div>
-          )}
-          {notInFullBoard && (
-            <div className="icon-text">
-              <span className="icon">
-                <i className="icon-cucinaretro-denied" />
-              </span>
-              <span>
-                {t("Dishes not included in the Columbia Hotel's board menu")}
-              </span>
-            </div>
-          )}
-        </Hero>
-      )}
+      <Notes
+        vegan={vegan.totalCount > 0}
+        notInFullBoard={notInFullBoard.totalCount > 0}
+      />
     </Page>
   )
 }

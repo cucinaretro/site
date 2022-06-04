@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import classNames from "classnames"
 
 export default function Hero({
@@ -35,4 +36,16 @@ export default function Hero({
       </div>
     </section>
   )
+}
+
+Hero.propTypes = {
+  title: PropTypes.string,
+  subtitle: PropTypes.string,
+  centered: PropTypes.bool,
+  children: PropTypes.any,
+  className: PropTypes.string,
+}
+
+Hero.defaultProps = {
+  centered: false,
 }

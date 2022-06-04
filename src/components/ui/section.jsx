@@ -20,9 +20,7 @@ export default function Section({
       itemScope={itemScope}
       itemType={itemType}
     >
-      {(title || subtitle) && (
-        <SectionTitle title={title} subtitle={subtitle} link={link} />
-      )}
+      <SectionTitle title={title} subtitle={subtitle} link={link} />
       {children && <div className="container">{children}</div>}
     </section>
   )
