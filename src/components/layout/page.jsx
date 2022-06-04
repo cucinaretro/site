@@ -1,4 +1,4 @@
-import React from "react"
+import React, { Fragment } from "react"
 import { Seo } from "@pittica/gatsby-plugin-seo"
 
 import Footer from "../ui/footer"
@@ -15,7 +15,7 @@ export default function Page({
   children,
 }) {
   return (
-    <div>
+    <Fragment>
       <Seo title={title} description={description} path={location.pathname} />
       <TopMenu
         title={title}
@@ -26,6 +26,6 @@ export default function Page({
       />
       <Main>{children}</Main>
       <Footer />
-    </div>
+    </Fragment>
   )
 }

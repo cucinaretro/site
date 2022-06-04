@@ -3,7 +3,9 @@ import classNames from "classnames"
 
 import "../../../scss/components/section/menu/_entry.scss"
 
-export default function Entry({ entry: { name, description, vegan, prices } }) {
+export default function Entry({
+  entry: { name, description, vegan, notInFullBoard, prices },
+}) {
   if (name) {
     return (
       <div
@@ -24,6 +26,11 @@ export default function Entry({ entry: { name, description, vegan, prices } }) {
                 <i className="icon-cucinaretro-vegetarian" />
               </span>
             )}
+            {notInFullBoard && (
+              <span className="icon">
+                <i className="icon-cucinaretro-denied" />
+              </span>
+            )}
           </h6>
           {description && (
             <div
@@ -40,12 +47,16 @@ export default function Entry({ entry: { name, description, vegan, prices } }) {
           itemType="https://schema.org/Offer"
         >
           <meta itemProp="priceCurrency" content="EUR" />
-          {prices.length > 0 &&
-            prices.map(({ id, price, notes }) => {
+          {prices &&
+            prices.length > 0 &&
+            prices.map(({ price, notes, formattedPrice }, i) => {
               const value = parseFloat(price)
 
               return (
-                <div className={classNames("columns", "is-mobile")} key={id}>
+                <div
+                  className={classNames("columns", "is-mobile")}
+                  key={`menu-entry-price-${i}`}
+                >
                   {notes && (
                     <div
                       className={classNames(
@@ -65,9 +76,9 @@ export default function Entry({ entry: { name, description, vegan, prices } }) {
                         "is-offset-9": !notes,
                       })}
                       itemProp="price"
-                      content={value.toFixed(2)}
+                      content={formattedPrice}
                     >
-                      € {value.toFixed(2)}
+                      € {formattedPrice}
                     </div>
                   )}
                 </div>

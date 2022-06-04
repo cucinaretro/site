@@ -1,9 +1,10 @@
 import React from "react"
 import { graphql } from "gatsby"
-import merge from "lodash.merge"
+import { useI18next } from "gatsby-plugin-react-i18next"
 
 import Switcher from "../components/section/switcher"
 import Page from "../components/layout/page"
+import Hero from "../components/ui/hero"
 
 export default function PageTemplate({
   data: {
@@ -13,12 +14,13 @@ export default function PageTemplate({
       },
     },
     navigation,
-    pageLocalized,
-    pageNeutral,
+    page: { title, description, contents },
+    vegan,
+    notInFullBoard,
   },
   location,
 }) {
-  const { title, description, contents } = merge(pageNeutral, pageLocalized)
+  const { t } = useI18next()
 
   return (
     <Page
@@ -32,103 +34,38 @@ export default function PageTemplate({
       {contents.map((content) => (
         <Switcher key={content.id} content={content} />
       ))}
+      {(vegan || notInFullBoard) && (
+        <Hero title={t("Notes")}>
+          {vegan && (
+            <div className="icon-text">
+              <span className="icon">
+                <i className="icon-cucinaretro-vegetarian" />
+              </span>
+              <span>{t("Vegan")}</span>
+            </div>
+          )}
+          {notInFullBoard && (
+            <div className="icon-text">
+              <span className="icon">
+                <i className="icon-cucinaretro-denied" />
+              </span>
+              <span>
+                {t("Dishes not included in the Columbia Hotel's board menu")}
+              </span>
+            </div>
+          )}
+        </Hero>
+      )}
     </Page>
   )
 }
 
 export const pageQuery = graphql`
-  fragment PageTemplate on GraphCMS_Page {
-    slug
-    title
-    locale
-    description
-    contents {
-      ... on GraphCMS_Content {
-        id
-        remoteId
-        remoteTypeName
-        title
-        subtitle
-        template
-        locale
-        content {
-          html
-        }
-        videos: videoEmbeds {
-          url
-          id
-          provider
-        }
-        images {
-          title
-          localFile {
-            childImageSharp {
-              gatsbyImageData(
-                width: 480
-                height: 480
-                placeholder: BLURRED
-                formats: [AUTO, WEBP, AVIF]
-              )
-            }
-          }
-        }
-      }
-      ... on GraphCMS_Place {
-        id
-        remoteId
-        remoteTypeName
-        title
-        locale
-        notes {
-          html
-        }
-        coordinates {
-          latitude
-          longitude
-        }
-      }
-      ... on GraphCMS_Menu {
-        id
-        remoteId
-        remoteTypeName
-        locale
-        name
-        sections {
-          id
-          remoteId
-          title
-          description {
-            html
-          }
-          entries {
-            id
-            remoteId
-            name
-            description {
-              html
-            }
-            prices {
-              id
-              remoteId
-              notes
-              price
-            }
-            vegan
-          }
-          notes
-        }
-      }
-      ... on GraphCMS_Instagram {
-        id
-        remoteId
-        remoteTypeName
-        locale
-        title
-        description
-      }
-    }
-  }
-  query PageBySlug($slug: String!, $language: GraphCMS_Locale!) {
+  query PageBySlug(
+    $remoteId: ID!
+    $language: GraphCMS_Locale!
+    $stage: GraphCMS_Stage!
+  ) {
     site {
       siteMetadata {
         organization {
@@ -147,7 +84,7 @@ export const pageQuery = graphql`
     }
     navigation: graphCmsNavigation(
       slug: { eq: "top" }
-      stage: { eq: PUBLISHED }
+      stage: { eq: $stage }
       locale: { eq: $language }
     ) {
       title
@@ -186,19 +123,142 @@ export const pageQuery = graphql`
         }
       }
     }
-    pageLocalized: graphCmsPage(
-      slug: { eq: $slug }
+    page: graphCmsPage(
+      remoteId: { eq: $remoteId }
+      stage: { eq: $stage }
       locale: { eq: $language }
-      stage: { eq: PUBLISHED }
     ) {
-      ...PageTemplate
+      slug
+      title
+      locale
+      description
+      contents {
+        ... on GraphCMS_Content {
+          id
+          remoteId
+          remoteTypeName
+          title
+          subtitle
+          template
+          locale
+          content {
+            html
+          }
+          videos: videoEmbeds {
+            url
+            id
+            provider
+          }
+          images {
+            title
+            localFile {
+              childImageSharp {
+                gatsbyImageData(
+                  width: 480
+                  height: 480
+                  placeholder: BLURRED
+                  formats: [AUTO, WEBP, AVIF]
+                )
+              }
+            }
+          }
+        }
+        ... on GraphCMS_Place {
+          id
+          remoteId
+          remoteTypeName
+          title
+          locale
+          notes {
+            html
+          }
+          coordinates {
+            latitude
+            longitude
+          }
+        }
+        ... on GraphCMS_Menu {
+          id
+          remoteId
+          remoteTypeName
+          locale
+          name
+          sections {
+            id
+            remoteId
+            title
+            description {
+              html
+            }
+            entries {
+              id
+              remoteId
+              name
+              description {
+                html
+              }
+              prices {
+                id
+                notes
+                price
+                formattedPrice
+                locale
+              }
+              vegan
+              notInFullBoard
+            }
+            notes
+          }
+        }
+        ... on GraphCMS_Instagram {
+          id
+          remoteId
+          remoteTypeName
+          locale
+          title
+          description
+        }
+      }
     }
-    pageNeutral: graphCmsPage(
-      slug: { eq: $slug }
-      locale: { eq: it }
-      stage: { eq: PUBLISHED }
+    vegan: allGraphCmsMenuEntry(
+      filter: {
+        vegan: { eq: true }
+        stage: { eq: $stage }
+        locale: { eq: $language }
+        menuSection: {
+          menu: {
+            pages: {
+              elemMatch: {
+                remoteId: { eq: $remoteId }
+                stage: { eq: $stage }
+                locale: { eq: $language }
+              }
+            }
+          }
+        }
+      }
     ) {
-      ...PageTemplate
+      totalCount
+    }
+    notInFullBoard: allGraphCmsMenuEntry(
+      filter: {
+        notInFullBoard: { eq: true }
+        stage: { eq: $stage }
+        locale: { eq: $language }
+        menuSection: {
+          menu: {
+            pages: {
+              elemMatch: {
+                remoteId: { eq: $remoteId }
+                stage: { eq: $stage }
+                locale: { eq: $language }
+              }
+            }
+          }
+        }
+      }
+    ) {
+      totalCount
     }
   }
 `

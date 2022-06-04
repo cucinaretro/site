@@ -14,28 +14,33 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     {
       pages: allGraphCmsPage(filter: { stage: { eq: PUBLISHED } }) {
         nodes {
+          remoteId
           slug
           updatedAt
           language: locale
           remotePath
+          stage
         }
       }
     }
   `)
 
-  pages.nodes.forEach(({ slug, updatedAt, language, remotePath }) =>
-    createPage({
-      path: remotePath,
-      component: path.resolve(`./src/templates/page.jsx`),
-      context: {
-        slug,
-        updatedAt,
-        language,
-      },
-    })
+  pages.nodes.forEach(
+    ({ remoteId, slug, updatedAt, language, remotePath, stage }) =>
+      createPage({
+        path: remotePath,
+        component: path.resolve(`./src/templates/page.jsx`),
+        context: {
+          remoteId,
+          slug,
+          updatedAt,
+          language,
+          stage,
+        },
+      })
   )
 }
-
+/*
 exports.onPreInit = async ({ reporter }) => {
   const config = {
     headers: {
@@ -76,7 +81,7 @@ exports.onPreInit = async ({ reporter }) => {
     await axios.patch(endpoint, { build_settings: payload }, config)
   }
 }
-
+*/
 exports.createResolvers = ({ createResolvers }) => {
   const lc = (locale) => {
     const lc = formatLocale(locale)
@@ -95,6 +100,12 @@ exports.createResolvers = ({ createResolvers }) => {
 
           return `${lo.path}/${slug !== "home" ? slug : ""}`
         },
+      },
+    },
+    GraphCMS_Price: {
+      formattedPrice: {
+        type: "String",
+        resolve: ({ price }) => parseFloat(price).toFixed(2),
       },
     },
     GraphCMS_Content: {

@@ -2,16 +2,17 @@ require("dotenv").config()
 
 const siteUrl = `https://${process.env.HOST}`
 const locales = ["it", "en"]
+const locale = {
+  language: process.env.LOCALE.toLowerCase(),
+  culture: process.env.CULTURE.toUpperCase(),
+}
 
 module.exports = {
   siteMetadata: {
     title: process.env.NAME,
     author: process.env.OWNER_COMPANY,
     description: process.env.DESCRIPTION,
-    locale: {
-      language: process.env.LOCALE.toLowerCase(),
-      culture: process.env.CULTURE.toUpperCase(),
-    },
+    locale,
     siteUrl,
     organization: {
       company: process.env.OWNER_COMPANY,
@@ -90,7 +91,6 @@ module.exports = {
         token: process.env.GRAPHCMS_TOKEN,
         locales,
         fragmentsPath: "fragments",
-        stages: ["PUBLISHED"],
       },
     },
     {
@@ -182,7 +182,16 @@ module.exports = {
     {
       resolve: `@pittica/gatsby-plugin-seo`,
       options: {
+        title: process.env.NAME,
+        description: process.env.DESCRIPTION,
+        locale,
         image: `/share.jpg`,
+        siteUrl,
+        organization: {
+          name: process.env.OWNER_COMPANY,
+          url: `${siteUrl}/`,
+          logo: `${siteUrl}/logo.png`,
+        },
         socials: {
           instagram: {
             username: process.env.INSTAGRAM_USERNAME,
@@ -194,6 +203,7 @@ module.exports = {
             icon: "icon-cucinaretro-facebook",
           },
         },
+        debug: (process.env.ENV || process.env.NODE_ENV) !== "production",
       },
     },
     {

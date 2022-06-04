@@ -15,6 +15,16 @@ fragment MenuEntry on MenuEntry {
     }
   }
   vegan
+  notInFullBoard
+  prices {
+    ... on Price {
+      stage
+      locale
+      id
+      price
+      notes
+    }
+  }
   createdBy {
     ... on User {
       remoteTypeName: __typename
@@ -33,14 +43,6 @@ fragment MenuEntry on MenuEntry {
     ... on User {
       remoteTypeName: __typename
       remoteId: id
-      stage
-    }
-  }
-  prices {
-    ... on MenuPrice {
-      remoteTypeName: __typename
-      remoteId: id
-      locale
       stage
     }
   }

@@ -67,12 +67,6 @@ fragment ScheduledOperation on ScheduledOperation {
       locale
       stage
     }
-    ... on MenuPrice {
-      remoteTypeName: __typename
-      remoteId: id
-      locale
-      stage
-    }
     ... on MenuSection {
       remoteTypeName: __typename
       remoteId: id
