@@ -40,7 +40,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       })
   )
 }
-/*
+
 exports.onPreInit = async ({ reporter }) => {
   const config = {
     headers: {
@@ -81,7 +81,7 @@ exports.onPreInit = async ({ reporter }) => {
     await axios.patch(endpoint, { build_settings: payload }, config)
   }
 }
-*/
+
 exports.createResolvers = ({ createResolvers }) => {
   const lc = (locale) => {
     const lc = formatLocale(locale)
