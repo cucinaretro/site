@@ -3,10 +3,32 @@ import React from "react"
 import Hero from "../ui/hero"
 import Section from "../ui/section"
 import Entry from "./menu/entry"
+import Notes from "../ui/notes"
 
 import "../../scss/components/section/_menu.scss"
 
-export default function Menu({ content: { name, sections } }) {
+export default function Menu({ content: { name, showNotes, sections } }) {
+  let vegan = false
+  let notInFullBoard = false
+
+  if (showNotes) {
+    sections.forEach((section) => {
+      section.entries.forEach((entry) => {
+        if (entry.vegan) {
+          vegan = true
+        }
+
+        if (entry.notInFullBoard) {
+          notInFullBoard = true
+        }
+
+        return vegan || notInFullBoard
+      })
+
+      return vegan || notInFullBoard
+    })
+  }
+
   return (
     <article
       className="menu"
@@ -15,6 +37,7 @@ export default function Menu({ content: { name, sections } }) {
       itemType="https://schema.org/Menu"
     >
       <Hero title={name} />
+      <Notes vegan={vegan} notInFullBoard={notInFullBoard} />
       {sections.map((section) => (
         <Section
           title={section.title}

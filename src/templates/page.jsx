@@ -3,7 +3,6 @@ import { graphql } from "gatsby"
 
 import Switcher from "../components/section/switcher"
 import Page from "../components/layout/page"
-import Notes from "../components/ui/notes"
 
 export default function PageTemplate({
   data: {
@@ -14,8 +13,6 @@ export default function PageTemplate({
     },
     navigation,
     page: { title, description, contents },
-    vegan,
-    notInFullBoard,
   },
   location,
 }) {
@@ -31,10 +28,6 @@ export default function PageTemplate({
       {contents.map((content) => (
         <Switcher key={content.id} content={content} />
       ))}
-      <Notes
-        vegan={vegan.totalCount > 0}
-        notInFullBoard={notInFullBoard.totalCount > 0}
-      />
     </Page>
   )
 }
@@ -162,6 +155,7 @@ export const pageQuery = graphql`
           remoteTypeName
           locale
           name
+          showNotes
           sections {
             id
             remoteId
@@ -198,46 +192,6 @@ export const pageQuery = graphql`
           description
         }
       }
-    }
-    vegan: allGraphCmsMenuEntry(
-      filter: {
-        vegan: { eq: true }
-        stage: { eq: $stage }
-        locale: { eq: $language }
-        menuSection: {
-          menu: {
-            pages: {
-              elemMatch: {
-                remoteId: { eq: $remoteId }
-                stage: { eq: $stage }
-                locale: { eq: $language }
-              }
-            }
-          }
-        }
-      }
-    ) {
-      totalCount
-    }
-    notInFullBoard: allGraphCmsMenuEntry(
-      filter: {
-        notInFullBoard: { eq: true }
-        stage: { eq: $stage }
-        locale: { eq: $language }
-        menuSection: {
-          menu: {
-            pages: {
-              elemMatch: {
-                remoteId: { eq: $remoteId }
-                stage: { eq: $stage }
-                locale: { eq: $language }
-              }
-            }
-          }
-        }
-      }
-    ) {
-      totalCount
     }
   }
 `
